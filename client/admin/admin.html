@@ -1,0 +1,9 @@
+<template name="admin">
+    {{#unless isAdmin}}
+        <p class="alert alert-danger">
+            You don't have permissions to administrate anything here.
+            Please contact the owner of this site and ask them to give you the necessary permissions.
+        </p>
+    {{/unless}}
+
+</template>

@@ -1,0 +1,10 @@
+<template name="courses">
+    <h1>Kurser</h1>
+
+    <button class="btn btn-success createButton">Skapa kurs</button>
+
+    {{#if courses.count}}
+        {{> reactiveTable settings=tableSettings class="table table-striped table-bordered table-condensed"}}
+    {{/if}}
+
+</template>

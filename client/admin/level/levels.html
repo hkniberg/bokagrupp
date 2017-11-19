@@ -1,0 +1,42 @@
+<template name="levels">
+    <h1>Nivåer för {{name}}</h1>
+
+    <table class="data-table">
+        <tr>
+            <th>Nivånamn</th>
+            <th>Sortering</th>
+            <th>Förkunskapskrav</th>
+            <th>Beskrivning</th>
+            <th>Min ålder</th>
+            <th>Max ålder</th>
+        </tr>
+
+        {{#each levels}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{sortKey}}</td>
+                <td>{{prerequisite}}</td>
+                <td>{{description}}</td>
+                <td>{{minAge}}</td>
+                <td>{{maxAge}}</td>
+            </tr>
+        {{/each}}
+    </table>
+
+
+    <div class="well">
+        <h2>Lägg till nivå</h2>
+
+        {{#autoForm collection=Levels id="addLevelForm" type="method" meteormethod="addLevel"}}
+            {{> afQuickField name='name'}}
+            {{> afQuickField name='sortKey'}}
+            {{> afQuickField name='prerequisite'}}
+            {{> afQuickField name='description'}}
+            {{> afQuickField name='minAge'}}
+            {{> afQuickField name='maxAge'}}
+            {{> afQuickField name='courseId' type='hidden' value=_id}}
+            <button type="submit" class="btn btn-primary">Add level</button>
+        {{/autoForm}}
+
+    </div>
+</template>
