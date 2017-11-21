@@ -4,9 +4,10 @@
     <ul>
         <li>Anmälningssida: <a href="{{registrationUrl}}">{{registrationUrl}}</a></li>
         <li>Det finns just nu <a href="/admin/bookings/{{shortName}}">{{bookingCount}} anmälda</a> (av max {{bookingLimit}})</li>
-        <li><a href="/admin/addBookingForCourse/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
+        <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
         <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
         <li><a href="/admin/course/{{shortName}}/levels">Redigera nivåer</a></li>
+        <li><a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a></li>
     </ul>
 
     {{#if slots.count}}

@@ -1,0 +1,21 @@
+<template name="unpaidBookingsForCourse">
+    <h1>Obetalda anmälningar till <a href="/admin/course/{{shortName}}">{{name}}</a></h1>
+
+    <ul>
+        <li>Det finns totalt <b>{{bookingCount}}</b> anmälningar, varav <b>{{paidCount}}</b> betalda och <b>{{unpaidCount}}</b> obetalda</li>
+        <li>
+            Se <a href="/admin/bookings/{{shortName}}">alla anmälningar</a>
+        </li>
+    </ul>
+
+
+    {{#if unpaidBookings.count}}
+        <div class="help">
+            Här ser du alla obetalda anmälningar. Klicka på en rubrik för att sortera listan.
+            Använd betalknapparna i tabellen för att markera att en betalning har kommit in.
+        </div>
+
+        {{> reactiveTable settings=tableSettings class="table table-striped table-bordered table-condensed"}}
+    {{/if}}
+
+</template>

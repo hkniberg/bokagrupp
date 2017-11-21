@@ -80,3 +80,10 @@
     margin: 0px 0px 0px 0px;
 }
 
+.help {
+    font-style: italic;
+    color: #666666;
+    margin: 5px 0px 10px 5px;
+    width: 500px;
+}
+
