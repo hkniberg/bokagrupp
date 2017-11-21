@@ -1,0 +1,102 @@
+<template name="bookingsForCourse">
+    <h1>Anmälningar till <a href="/admin/course/{{shortName}}">{{name}}</a></h1>
+
+    <ul>
+        <li>
+            Publik anmälningssida:
+            <a href="{{registrationUrl}}">{{registrationUrl}}</a>
+        </li>
+        <li>
+            Det finns just nu <b>{{bookingCount}}</b> anmälda
+            (av max {{bookingLimit}}).
+        </li>
+        <li>
+            <a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a>
+        </li>
+        <li>
+            <a href="/admin/export/{{shortName}}">Exportera till excel</a>
+        </li>
+        <!-- TODO
+        <li>
+            <%= link_to 'Lägg upp en ny anmälan manuellt', "/admin/bookings/new?course=#{@course.id}" %>
+            <%= raw tip("I normalfallet bör du använda den publika anmälningssidan, eftersom felhanteringen är bättre där.") %>
+        </li>
+        -->
+
+        <!--
+        TODO
+        <li>
+            <form action="/admin/print_bookings">
+                <input type="hidden" name="course" value="<%=@course.id%>">
+                Skriv ut deltagarlista för <select name="date_period">
+                <% @course.slot_date_periods.each do |date_period| %>
+                <option value="<%=date_period%>"><%= date_period %></option>
+                <% end %>
+            </select>
+                <input type="submit" value="Skriv ut">
+            </form>
+        </li>
+        -->
+    </ul>
+
+
+
+    {{#if slots.count}}
+
+        {{#each slots}}
+            <div class="slot-bookings-section">
+
+                <div class="slot-name">
+                    {{name}}
+                </div>
+                {{> slotAvailability}}
+
+                {{#if bookingCount}}
+                    <div class="bookings-table">
+                        <table class="data-table">
+                            <tr>
+                                <th>Förnamn</th>
+                                <th>Efternamn</th>
+                                <th>Betalat?</th>
+                                <th>Personnummer</th>
+                                <th>Postnummer</th>
+                                <th>Medlemsnummer</th>
+                                <th>Epost</th>
+                                <th>Telefon</th>
+                                <th>Kommentar</th>
+                            </tr>
+
+                            {{#each bookings}}
+                                <tr>
+                                    <td>{{childFirstName}}</td>
+                                    <td>{{childLastName}}</td>
+                                    <td>{{> paymentStatusButtons}}</td>
+                                    <td>{{childPersonNumber}}</td>
+                                    <td>{{childZip}}</td>
+                                    <td>{{childMembershipNumber}}</td>
+                                    <td>{{parentEmail}}</td>
+                                    <td>{{parentPhone}}</td>
+                                    <td>{{comment}}</td>
+                                    <td>
+                                        <!-- TODO
+                                        <a href="/admin/bookings/<%=booking.id%>/edit">Byt grupp</a>
+                                        -->
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm removeButton" data-bookingid="{{_id}}">Avanmäl</button>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                {{/if}}
+            </div>
+
+        {{/each}}
+
+
+
+    {{/if}}
+
+
+</template>

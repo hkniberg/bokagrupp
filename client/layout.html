@@ -5,11 +5,8 @@
 
 <template name="layout">
 
-    {{#if isAdmin}}
-        {{> yield region='nav'}}
-    {{/if}}
-
     <div id="content" class="container-fluid">
         {{> yield}}
     </div>
+
 </template>

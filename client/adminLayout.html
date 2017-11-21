@@ -1,0 +1,17 @@
+<head>
+    <title>Skidskola</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+
+<template name="adminLayout">
+
+    {{#if isAdmin}}
+        {{> yield region='nav'}}
+        <div id="content" class="container-fluid adminPage">
+            {{> yield}}
+        </div>
+    {{else}}
+        <p class="alert alert-danger">Du måste vara inloggad för att komma hit</p>
+    {{/if}}
+
+</template>

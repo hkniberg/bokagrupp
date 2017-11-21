@@ -1,0 +1,82 @@
+.adminPage h1 {
+    font-size: 24px;
+    background-color: #ffffcc;
+    border-bottom-style: solid;
+    border-bottom-color: #ff9933;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.data-table {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-collapse: separate;
+    background-color: #eeeeee;
+    border: 3px solid #dddddd;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.data-table td {
+    background-color: #ffffff;
+    border-collapse: separate;
+    border: 1px solid #eeeeee;
+    padding: 3px;
+    margin: 3px;
+
+}
+
+.data-table th {
+    text-align: left;
+    border-collapse: separate;
+    padding: 3px;
+    margin: 3px;
+}
+
+
+.slot-bookings-section {
+    background: #add8e6;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 5px 5px 5px #AAAAAA;
+}
+
+.slot-bookings-section > .slot-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.slot-bookings-section > .bookings-table {
+    margin-left: 20px;
+}
+
+.slot-bookings-section .data-table {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background-color: #9fc9d7;
+    border: none;
+}
+
+.payment_status_button_table {
+    margin: 0px 0px 0px 0px;
+}
+
+.payment_status_true {
+    background: #adff2f;
+}
+
+.payment_status_false {
+    background: #f08080;
+}
+
+.payment_status_button {
+    margin: 0px 0px 0px 0px;
+}
+

@@ -1,0 +1,47 @@
+<template name="enterContactInfo">
+    <h1>Ange kontaktinformation</h1>
+
+    <div class="col col-xs-6">
+        <p>
+            Medlemsnummer: {{membershipNumber}}
+            Slot Id: {{_id}}
+        </p>
+
+        {{#autoForm collection=Bookings id="enterContactInfoForm" type="method" meteormethod="addBooking"}}
+            {{> afQuickField name='slotId' type='hidden' value=_id}}
+            {{> afQuickField name='levelId' type='hidden' value=level._id}}
+            {{> afQuickField name='courseId' type='hidden' value=course._id}}
+            {{> afQuickField name='childMembershipNumber' type='hidden' value=membershipNumber}}
+
+            {{> afQuickField name='childFirstName'}}
+            {{> afQuickField name='childLastName'}}
+            {{> afQuickField name='childPersonNumber'}}
+            {{> afQuickField name='childZip'}}
+            {{> afQuickField name='parentEmail'}}
+            {{> afQuickField name='parentPhone'}}
+
+            <button type="submit" class="btn btn-primary">Anmäl</button>
+        {{/autoForm}}
+
+        <div>
+            <a href="{{course.homeUrl}}">Till skidskolans hemsida</a>
+        </div>
+
+    </div>
+
+
+    <div class="col col-xs-6">
+        <div class="slot">
+            <div class="level-name">
+                {{levelName}}
+            </div>
+            <div class="slot-time">
+                {{time}}
+            </div>
+            <div class="slot-date-period">
+                {{datePeriod}}
+            </div>
+        </div>
+    </div>
+
+</template>

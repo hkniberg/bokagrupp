@@ -1,0 +1,17 @@
+<template name="bookingComplete">
+    <h1>Anmälan klar!</h1>
+    <p>
+        Tack för din anmälan av {{childName}} till
+        gruppen {{level.name}}, {{slot.time}} perioden {{slot.datePeriod}}.
+    </p>
+
+    {{{course.paymentInstructions}}}
+    <br>
+    <p>
+        Gör en <a href="/courses/{{course.shortName}}">ny bokning</a> <br>
+    </p>
+
+    <div>
+        <a href="{{course.homeUrl}}">Till skidskolans hemsida</a>
+    </div>
+</template>

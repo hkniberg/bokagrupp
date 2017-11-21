@@ -1,0 +1,46 @@
+<template name="import">
+    <h1>Import</h1>
+
+    {{#if importing}}
+        Importing...
+    {{else}}
+        <button class="btn btn-danger importButton">Import</button>
+    {{/if}}
+
+    {{> errorMessage "import"}}
+
+    {{#if result}}
+        <p class="alert alert-success">Import successful!</p>
+
+        <ul>
+            <li>Courses:</li>
+            <ul>
+                <li>Imported: {{result.importedCourses}}</li>
+                <li>Ignored: {{result.ignoredCourses}}</li>
+            </ul>
+            <li>Levels:</li>
+            <ul>
+                <li>Imported: {{result.importedLevels}}</li>
+                <li>Ignored: {{result.ignoredLevels}}</li>
+                <li>Invalid: {{result.invalidLevels}}</li>
+            </ul>
+            <li>Slots:</li>
+            <ul>
+                <li>Imported: {{result.importedSlots}}</li>
+                <li>Ignored: {{result.ignoredSlots}}</li>
+                <li>Invalid: {{result.invalidSlots}}</li>
+            </ul>
+            <li>Bookings:</li>
+            <ul>
+                <li>Imported: {{result.importedBookings}}</li>
+                <li>Ignored: {{result.ignoredBookings}}</li>
+                <li>Invalid: {{result.invalidBookings}}</li>
+            </ul>
+        </ul>
+
+        <div class="well">
+
+        </div>
+    {{/if}}
+
+</template>

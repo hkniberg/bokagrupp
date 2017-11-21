@@ -1,5 +1,6 @@
-import {Courses, Levels} from "../lib/collection"
+import {Courses, Levels, Slots, Bookings} from "../lib/collection"
 import {assertSuperUser} from "../lib/accounts"
+import {assertAdmin} from "../lib/accounts";
 
 Meteor.publish('users', function() {
   assertSuperUser(this.userId)
@@ -21,11 +22,57 @@ Meteor.publish('course', function(shortName) {
   return Courses.find({_id: course._id})
 })
 
-Meteor.publish('levels', function(courseShortName) {
+Meteor.publish('levelsForCourse', function(courseShortName) {
   const course = getCourseWithShortName(courseShortName)
   return [
     Courses.find({_id: course._id}),
     Levels.find({courseId: course._id})
+  ]
+})
+
+Meteor.publish('slotsForCourse', function(courseShortName) {
+  const course = getCourseWithShortName(courseShortName)
+  return [
+    Courses.find({_id: course._id}),
+    Slots.find({courseId: course._id})
+  ]
+})
+
+Meteor.publish('bookingsForCourse', function(courseShortName) {
+  assertAdmin(this.userId)
+  const course = getCourseWithShortName(courseShortName)
+  return [
+    Courses.find({_id: course._id}),
+    Levels.find({courseId: course._id}),
+    Slots.find({courseId: course._id}),
+    Bookings.find({courseId: course._id})
+  ]
+})
+
+
+Meteor.publish('slot', function(slotId) {
+  const slot = Slots.findOne({_id: slotId})
+  const level = Levels.findOne({_id: slot.levelId})
+  const course = Courses.findOne({_id: level.courseId})
+
+  return [
+    Slots.find({_id: slot._id}),
+    Levels.find({_id: level._id}),
+    Courses.find({_id: course._id})
+  ]
+})
+
+Meteor.publish('booking', function(bookingId) {
+  const booking = Bookings.findOne({_id: bookingId})
+  const slot = Slots.findOne({_id: booking.slotId})
+  const level = Levels.findOne({_id: slot.levelId})
+  const course = Courses.findOne({_id: level.courseId})
+
+  return [
+    Bookings.find({_id: booking._id}),
+    Slots.find({_id: slot._id}),
+    Levels.find({_id: level._id}),
+    Courses.find({_id: course._id})
   ]
 })
 

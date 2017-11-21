@@ -5,4 +5,52 @@
         <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
         <li><a href="/admin/course/{{shortName}}/levels">Redigera nivåer</a></li>
     </ul>
+
+    {{#if slots.count}}
+        <h2>Grupper</h2>
+
+        <table class="data-table">
+            <tr>
+                <th>Nivå</th>
+                <th>Datumperiod</th>
+                <th>Tid</th>
+                <th>Max platser</th>
+                <th>Anmälda</th>
+                <th></th>
+            </tr>
+
+            {{#each slots}}
+                <tr>
+                    <td>{{levelName}}</td>
+                    <td>{{datePeriod}}</td>
+                    <td>{{time}}</td>
+                    <td>{{limit}}</td>
+                    <td><a href="/admin/bookings/{{../shortName}}">{{bookingCount}}</a></td>
+                    <td>
+                        <button class="btn btn-sm btn-danger">Radera grupp</button>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+
+    {{/if}}
+
+    {{#if levels.count}}
+        <div class="well">
+            <h2>Skapa ny grupp</h2>
+
+            {{#autoForm collection=Slots id="addSlotForm" type="method" meteormethod="addSlot"}}
+                {{> afQuickField name='courseId' type='hidden' value=_id}}
+                {{> afQuickField name='levelId' options=levelSelectValues }}
+                {{> afQuickField name='datePeriod'}}
+                {{> afQuickField name='time'}}
+                {{> afQuickField name='limit'}}
+                <button type="submit" class="btn btn-primary">Skapa grupp</button>
+            {{/autoForm}}
+
+        </div>
+    {{/if}}
+
+    <button class="btn btn-danger removeButton">Ta bort kurs</button>
+
 </template>

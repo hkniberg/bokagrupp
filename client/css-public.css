@@ -1,0 +1,63 @@
+.level {
+    width: 250px;
+    margin-right: 10px;
+}
+
+.level > .level-name {
+    font-size: 22px;
+}
+
+.level-prerequisite {
+    font-style: italic;
+    margin-top: 5px;
+}
+.level-description {
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+
+
+.slot {
+    position: relative;
+    border: 1px solid black;
+    width: 190px;
+    height: 80px;
+    padding: 5px;
+    font-family: Tahoma, Arial;
+    font-size: 12px;
+    line-height: normal;
+    margin-right: 5px;
+    margin-bottom: 20px;
+    background: #e6e6e6;
+
+    -moz-box-shadow: 5px 5px 5px #888;
+    -webkit-box-shadow: 5px 5px 5px #888;
+    box-shadow: 5px 5px 5px #888;
+}
+
+.slot > .level-name {
+    font-size: 16px;
+}
+
+.slot-full {
+    color: gray;
+}
+
+.slot-spaces-left {
+    color: green;
+}
+
+.slot-full-message {
+    color: red;
+}
+
+.slot-full-message {
+
+}
+
+.slot-book-button {
+    position: absolute;
+    top: 55px;
+    left: 140px;
+}

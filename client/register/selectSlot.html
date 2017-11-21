@@ -1,0 +1,83 @@
+<template name="selectSlot">
+    {{#if hasStarted}}
+        <h1>För sent</h1>
+        <p class="text-danger">Skidskolan har redan startat, så det går inte att anmäla sig längre.</p>
+    {{/if}}
+
+    {{#if isFull}}
+        <h1>Fullbokat</h1>
+        <p class="text-danger">Skidskolan är just nu fullbokad, men det kan komma platser senare. Välkommen åter!</p>
+    {{/if}}
+
+    {{#if canBook}}
+        <h1>Välj en grupp till ditt barn</h1>
+    {{/if}}
+
+    <table>
+        {{#each levels}}
+            <tr valign="top">
+            <td>
+                <div class="level">
+                    <div class="level-name">
+                        {{name}}
+                    </div>
+                    <div class="level-prerequisite">
+                        Förkunskapskrav: {{prerequisiteDescription}}
+                    </div>
+                    <div class="level-description">
+                        {{description}}
+                    </div>
+                </div>
+            </td>
+
+            {{#each slots}}
+                <td>
+                    <div class="slot">
+                        {{#if isBookable}}
+                            <div class="slot-available">
+                                <div class="level-name">
+                                    {{../name}}
+                                </div>
+                                <div class="slot-time">
+                                    {{time}}
+                                </div>
+                                <div class="slot-date-period">
+                                    {{datePeriod}}
+                                </div>
+                                {{> slotAvailability}}
+                                <div class="slot-book-button">
+                                    <button class="selectSlotButton" data-slotid="{{_id}}">Boka</button>
+                                </div>
+                            </div>
+                        {{else}}
+                            <div class="slot-full">
+                                <div class="level-name">
+                                    {{../name}}
+                                </div>
+                                <div class="slot-time">
+                                    {{time}}
+                                </div>
+                                <div class="slot-date-period">
+                                    {{datePeriod}}
+                                </div>
+                                {{#if ../../hasStarted}}
+                                    (Anmälan stängd)
+                                {{else}}
+                                    {{> slotAvailability}}
+                                {{/if}}
+                            </div>
+                        {{/if}}
+                    </div>
+                </td>
+
+
+            {{/each}}
+
+
+        </tr>
+        {{/each}}
+
+    </table>
+
+
+</template>

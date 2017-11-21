@@ -1,0 +1,14 @@
+<!--
+  If Session.get("error") contains something, then we'll display it as an error alert.
+
+  If you don't want to use a global error message you can provide
+  a data context (for example "editCustomer"), In that case we'll
+  use Session.get("editCustomer.error"). That way a single page can have different sections
+  with different error messages.
+-->
+
+<template name="errorMessage">
+    {{#if errorMessage}}
+        <div class="alert alert-danger">{{errorMessage}}</div>
+    {{/if}}
+</template>

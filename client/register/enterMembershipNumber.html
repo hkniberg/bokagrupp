@@ -1,0 +1,35 @@
+<template name="enterMembershipNumber">
+    <h1>Ange barnets medlemsnummer</h1>
+
+    <div class="col col-xs-6">
+        <p>
+            För att kunna gå i denna skidskola behöver ditt barn vara medlem i Friluftsfrämjandet.
+        </p>
+
+        {{> quickForm schema=membershipNumberSchema id="membershipNumberForm" buttonContent="OK"}}
+
+        <p>Inte medlem ännu? <a href="http://www.friluftsframjandet.se/bli_medlem">Ansök här</a></p>
+
+        <div>
+            <a href="{{course.homeUrl}}">Till skidskolans hemsida</a>
+        </div>
+
+    </div>
+
+
+    <div class="col col-xs-6">
+        <div class="slot">
+            <div class="level-name">
+                {{levelName}}
+            </div>
+            <div class="slot-time">
+                {{time}}
+            </div>
+            <div class="slot-date-period">
+                {{datePeriod}}
+            </div>
+        </div>
+    </div>
+
+
+</template>
