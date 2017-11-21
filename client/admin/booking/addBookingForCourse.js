@@ -1,10 +1,8 @@
 import {getBooking} from "../../../lib/methods/bookingMethods";
 import {getCourse} from "../../../lib/methods/courseMethods";
-import {getLevelsForCourse} from "../../../lib/methods/levelMethods";
-import {getSlotsForLevel} from "../../../lib/methods/slotMethods";
 import {getSlot} from "../../../lib/methods/slotMethods";
 
-const slotIdVar = new ReactiveVar()
+
 
 AutoForm.addHooks(['addBookingForCourseForm'], {
   onSuccess: function(formType, bookingId) {
@@ -16,22 +14,12 @@ AutoForm.addHooks(['addBookingForCourseForm'], {
 })
 
 Template.addBookingForCourse.helpers({
-  levels() {
-    const course = Template.currentData()
-    return getLevelsForCourse(course._id)
-  },
-
-  slots() {
-    const level = Template.currentData()
-    return getSlotsForLevel(level._id)
-  },
-
   slotId() {
-    return slotIdVar.get()
+    return Session.get("selectedSlotId")
   },
 
   levelId() {
-    const slotId = slotIdVar.get()
+    const slotId = Session.get("selectedSlotId")
     if (slotId) {
       const slot = getSlot(slotId)
       return slot.levelId
@@ -44,10 +32,3 @@ Template.addBookingForCourse.helpers({
   }
 })
 
-Template.addBookingForCourse.events({
-  "change .slotSelect"() {
-    const slotSelect = $(".slotSelect")
-    const slotId = slotSelect.val()
-    slotIdVar.set(slotId)
-  }
-})

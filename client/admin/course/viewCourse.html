@@ -8,6 +8,13 @@
         <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
         <li><a href="/admin/course/{{shortName}}/levels">Redigera nivåer</a></li>
         <li><a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a></li>
+        <li><a href="/admin/export/{{shortName}}">Exportera till Excel</a></li>
+        <li>
+            Skriv ut deltagarlista för: {{> datePeriodSelect}}
+            {{#if selectedDatePeriod}}
+                <button class="button btn-success btn-sm printBookingsButton">Skriv ut</button>
+            {{/if}}
+        </li>
     </ul>
 
     {{#if slots.count}}
@@ -55,6 +62,8 @@
         </div>
     {{/if}}
 
-    <button class="btn btn-danger removeButton">Ta bort kurs</button>
+    {{#unless bookingCount}}
+        <button class="btn btn-danger removeButton">Ta bort kurs</button>
+    {{/unless}}
 
 </template>

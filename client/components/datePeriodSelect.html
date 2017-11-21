@@ -1,0 +1,8 @@
+<template name="datePeriodSelect">
+    <select class="datePeriodSelect">
+        <option value="">(välj datumperiod)</option>
+        {{#each datePeriods}}
+            <option {{selected}} value="{{this}}">{{this}}</option>
+        {{/each}}
+    </select>
+</template>

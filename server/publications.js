@@ -1,6 +1,8 @@
 import {Courses, Levels, Slots, Bookings} from "../lib/collection"
 import {assertSuperUser} from "../lib/accounts"
 import {assertAdmin} from "../lib/accounts";
+import {getSlotsForCourseAndDatePeriod} from "../lib/methods/slotMethods";
+import {getBookingsForCourseAndDatePeriod} from "../lib/methods/bookingMethods";
 
 Meteor.publish('users', function() {
   assertSuperUser(this.userId)
@@ -49,6 +51,17 @@ Meteor.publish('bookingsForCourse', function(courseShortName) {
   ]
 })
 
+Meteor.publish('bookingsForCourseAndDatePeriod', function(courseShortName, datePeriod) {
+  console.log("publication opened: bookingsForCourseAndDatePeriod")
+  assertAdmin(this.userId)
+  const course = getCourseWithShortName(courseShortName)
+  return [
+    Courses.find({_id: course._id}),
+    Levels.find({courseId: course._id}),
+    getSlotsForCourseAndDatePeriod(course._id, datePeriod),
+    getBookingsForCourseAndDatePeriod(course._id, datePeriod)
+  ]
+})
 
 Meteor.publish('slot', function(slotId) {
   const slot = Slots.findOne({_id: slotId})

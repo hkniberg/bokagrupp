@@ -1,6 +1,6 @@
 import {isAdmin} from "../lib/roles"
 import {Courses, Levels, Slots, Bookings} from "../lib/collection"
-
+import {formatDate} from "../lib/util"
 
 /**
  * Sets an error to be shown by the errorMessage template.
@@ -67,10 +67,5 @@ Template.registerHelper('Bookings', function() {
 
 Template.registerHelper('formatDate', function (date) {
   return formatDate(date)
-});
-
-export const formatDate = function(date) {
-  return moment(date).format('YYYY-MM-DD')
-}
-
+})
 

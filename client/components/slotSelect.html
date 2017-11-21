@@ -1,0 +1,10 @@
+<template name="slotSelect">
+    <select class="slotSelect form-control">
+        <option value="">(välj grupp)</option>
+        {{#each levels}}
+            {{#each slots}}
+                <option {{selected}} value="{{_id}}">{{../name}}: {{datePeriod}} {{time}}</option>
+            {{/each}}
+        {{/each}}
+    </select>
+</template>

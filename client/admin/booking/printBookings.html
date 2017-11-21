@@ -1,0 +1,31 @@
+<!--
+Date context should be
+{
+  datePeriod: ...
+  courseShortName: ...
+}
+-->
+<template name="printBookings">
+    <h1>Anmälningar till {{datePeriod}}</h1>
+
+    {{#each slots}}
+        {{#if bookings.count}}
+            <div class="keep-together">
+                <h2>{{time}} {{level.name}}</h2>
+
+                <div class="bookings-table">
+                    <table class="data-table">
+                        {{#each bookings}}
+                            <tr>
+                                <td>{{childFullName}}</td>
+                                <td>{{parentPhone}}</td>
+                            </tr>
+
+                        {{/each}}
+                    </table>
+                </div>
+            </div>
+        {{/if}}
+
+    {{/each}}
+</template>
