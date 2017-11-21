@@ -1,5 +1,6 @@
 import {getLevelsForCourse} from "../../../lib/methods/levelMethods";
 import {getSlotsForCourse} from "../../../lib/methods/slotMethods";
+import {getSlot} from "../../../lib/methods/slotMethods";
 
 Template.viewCourse.helpers({
   levelSelectValues() {
@@ -42,6 +43,22 @@ Template.viewCourse.events({
     }, function(){
       Meteor.call("removeCourse", course._id)
       Router.go("/admin/courses")
+    });
+  },
+
+  "click .removeSlotButton"(event) {
+    const slotId = $(event.target).data("slotid")
+    const slot = getSlot(slotId)
+    console.log("slotId", slotId)
+    sweetAlert({
+      title: "Är du säker?",
+      text: "Vill du verkligen ta bort gruppen " + slot.level().name + " " + slot.datePeriod + " " + slot.time + "?",
+      type: "warning",
+      confirmButtonColor: "red",
+      confirmButtonText: "Japp! Bort med gruppen!",
+      showCancelButton: true
+    }, function(){
+      Meteor.call("removeSlot", slotId)
     });
   },
 

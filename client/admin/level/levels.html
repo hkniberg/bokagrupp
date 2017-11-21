@@ -15,12 +15,12 @@
 
             {{#each levels}}
                 <tr>
-                    <td>{{name}}</td>
-                    <td>{{sortKey}}</td>
-                    <td>{{prerequisite}}</td>
-                    <td>{{description}}</td>
-                    <td>{{minAge}}</td>
-                    <td>{{maxAge}}</td>
+                    {{> inPlace collection=Levels field="name" doc=this}}
+                    {{> inPlace collection=Levels field="sortKey" doc=this}}
+                    {{> inPlace collection=Levels field="prerequisite" doc=this}}
+                    {{> inPlace collection=Levels field="description" doc=this}}
+                    {{> inPlace collection=Levels field="minAge" doc=this}}
+                    {{> inPlace collection=Levels field="maxAge" doc=this}}
                 </tr>
             {{/each}}
 

@@ -13,5 +13,12 @@ Template.bookingsForCourse.events({
     }, function(){
       Meteor.call("removeBooking", bookingId)
     });
+  },
+  
+  "click .changeSlotButton"(event) {
+    const bookingId = $(event.target).data("bookingid")
+    const booking = getBooking(bookingId)
+    Router.go("/admin/changeSlot/" + bookingId)
+
   }
 })

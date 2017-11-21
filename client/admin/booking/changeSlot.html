@@ -1,0 +1,23 @@
+<template name="changeSlot">
+    <h1>Byt grupp</h1>
+
+    <p>
+        <b>Namn:</b> {{childFullName}}
+    </p>
+
+    <p>
+        <b>Medlemsnummer:</b> {{childMembershipNumber}}
+    </p>
+
+    <p>
+        <b>Personnummer:</b> {{childPersonNumber}}
+    </p>
+
+    {{#autoForm collection=Bookings id="changeSlotForm" doc=this type="method-update" meteormethod="updateBooking"}}
+        {{> afQuickField name='slotId' options=slotSelectValues}}
+        {{> afQuickField name='comment'}}
+
+        <button type="submit" class="btn btn-primary">Spara</button>
+    {{/autoForm}}
+
+</template>

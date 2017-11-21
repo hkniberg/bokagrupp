@@ -83,8 +83,8 @@ Meteor.publish('booking', function(bookingId) {
 
   return [
     Bookings.find({_id: booking._id}),
-    Slots.find({_id: slot._id}),
-    Levels.find({_id: level._id}),
+    Slots.find({courseId: course._id}),
+    Levels.find({courseId: course._id}),
     Courses.find({_id: course._id})
   ]
 })

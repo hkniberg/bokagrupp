@@ -27,18 +27,19 @@
                 <th>Tid</th>
                 <th>Max platser</th>
                 <th>Anmälda</th>
-                <th></th>
             </tr>
 
             {{#each slots}}
                 <tr>
                     <td>{{levelName}}</td>
-                    <td>{{datePeriod}}</td>
-                    <td>{{time}}</td>
-                    <td>{{limit}}</td>
-                    <td><a href="/admin/bookings/{{../shortName}}">{{bookingCount}}</a></td>
+                    {{> inPlace collection=Slots field="datePeriod" doc=this}}
+                    {{> inPlace collection=Slots field="time" doc=this}}
+                    {{> inPlace collection=Slots field="limit" doc=this}}
                     <td>
-                        <button class="btn btn-sm btn-danger">Radera grupp</button>
+                        <a href="/admin/bookings/{{../shortName}}">{{bookingCount}}</a>
+                        {{#unless bookingCount}}
+                            <button style="margin-left: 5px;" data-slotid="{{_id}}" class="btn btn-xs btn-danger removeSlotButton">Radera grupp</button>
+                        {{/unless}}
                     </td>
                 </tr>
             {{/each}}

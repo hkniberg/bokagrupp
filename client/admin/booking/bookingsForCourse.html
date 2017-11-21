@@ -68,22 +68,21 @@
 
                             {{#each bookings}}
                                 <tr>
-                                    <td>{{childFirstName}}</td>
-                                    <td>{{childLastName}}</td>
+                                    {{> inPlace collection=Bookings field="childFirstName" doc=this}}
+                                    {{> inPlace collection=Bookings field="childLastName" doc=this}}
+
                                     <td>{{> paymentStatusButtons}}</td>
-                                    <td>{{childPersonNumber}}</td>
-                                    <td>{{childZip}}</td>
-                                    <td>{{childMembershipNumber}}</td>
-                                    <td>{{parentEmail}}</td>
-                                    <td>{{parentPhone}}</td>
-                                    <td>{{comment}}</td>
+                                    {{> inPlace collection=Bookings field="childPersonNumber" doc=this}}
+                                    {{> inPlace collection=Bookings field="childZip" doc=this}}
+                                    {{> inPlace collection=Bookings field="childMembershipNumber" doc=this}}
+                                    {{> inPlace collection=Bookings field="parentEmail" doc=this}}
+                                    {{> inPlace collection=Bookings field="parentPhone" doc=this}}
+                                    {{> inPlace collection=Bookings field="comment" doc=this}}
                                     <td>
-                                        <!-- TODO
-                                        <a href="/admin/bookings/<%=booking.id%>/edit">Byt grupp</a>
-                                        -->
+                                        <button class="btn btn-warning btn-xs changeSlotButton" data-bookingid="{{_id}}">Byt grupp</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger btn-sm removeButton" data-bookingid="{{_id}}">Avanmäl</button>
+                                        <button class="btn btn-danger btn-xs removeButton" data-bookingid="{{_id}}">Avanmäl</button>
                                     </td>
                                 </tr>
                             {{/each}}
