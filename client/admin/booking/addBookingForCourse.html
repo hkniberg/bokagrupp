@@ -1,0 +1,34 @@
+<template name="addBookingForCourse">
+    <h1>Skapa bokning för {{name}}</h1>
+
+    <div class="form-group">
+        <label class="control-label">Grupp</label>
+        <select class="slotSelect form-control">
+            <option value=""></option>
+            {{#each levels}}
+                {{#each slots}}
+                    <option value="{{_id}}">{{../name}}: {{datePeriod}} {{time}}</option>
+                {{/each}}
+            {{/each}}
+        </select>
+    </div>
+
+    {{#if slotId}}
+        {{#autoForm collection=Bookings id="addBookingForCourseForm" type="method" meteormethod="addBooking"}}
+            {{> afQuickField name='slotId' type="hidden" value=slotId}}
+            {{> afQuickField name='levelId' type="hidden" value=levelId}}
+            {{> afQuickField name='courseId' type="hidden" value=courseId}}
+            {{> afQuickField name='childMembershipNumber'}}
+            {{> afQuickField name='childFirstName'}}
+            {{> afQuickField name='childLastName'}}
+            {{> afQuickField name='childPersonNumber'}}
+            {{> afQuickField name='childZip'}}
+            {{> afQuickField name='parentEmail'}}
+            {{> afQuickField name='parentPhone'}}
+            {{> afQuickField name='comment'}}
+
+            <button type="submit" class="btn btn-primary">Skapa bokning</button>
+        {{/autoForm}}
+    {{/if}}
+
+</template>
