@@ -12,10 +12,20 @@ Template.users.helpers({
       fields: [
         userEmailField(),
         roleField()
-      ]
+      ],
+      showFilter: false,
+      rowsPerPage: 20,
+      showNavigation: "auto"
     }
   }
 })
+
+Template.users.events({
+  "click .createButton"() {
+    Router.go("/admin/addUser")
+  }
+})
+
 
 export function roleField() {
   return {
@@ -34,7 +44,7 @@ export function roleField() {
 }
 
 export function userEmailField() {
-  return linkField('emails', 'Email', function(user) {
+  return linkField('emails', 'Epost', function(user) {
     const email = user.emails[0].address
     return {
       href: '/admin/users/' + email,

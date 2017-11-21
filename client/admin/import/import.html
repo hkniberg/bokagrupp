@@ -2,39 +2,40 @@
     <h1>Import</h1>
 
     {{#if importing}}
-        Importing...
+        <p class="alert alert-warning">Importerar...</p>
     {{else}}
-        <button class="btn btn-danger importButton">Import</button>
+        <button class="btn btn-danger importButton">Importera data från gamla systemet</button>
+        <div>Data som redan importerats kommer inte importeras igen</div>
     {{/if}}
 
     {{> errorMessage "import"}}
 
     {{#if result}}
-        <p class="alert alert-success">Import successful!</p>
+        <p class="alert alert-success">Importen gick bra!</p>
 
         <ul>
-            <li>Courses:</li>
+            <li>Kurser:</li>
             <ul>
-                <li>Imported: {{result.importedCourses}}</li>
-                <li>Ignored: {{result.ignoredCourses}}</li>
+                <li>Importerade: {{result.importedCourses}}</li>
+                <li>Fanns redan: {{result.ignoredCourses}}</li>
             </ul>
-            <li>Levels:</li>
+            <li>Nivåer:</li>
             <ul>
-                <li>Imported: {{result.importedLevels}}</li>
-                <li>Ignored: {{result.ignoredLevels}}</li>
-                <li>Invalid: {{result.invalidLevels}}</li>
+                <li>Importerade: {{result.importedLevels}}</li>
+                <li>Fanns redan: {{result.ignoredLevels}}</li>
+                <li>Felaktiga (ignorerades): {{result.invalidLevels}}</li>
             </ul>
-            <li>Slots:</li>
+            <li>Grupper:</li>
             <ul>
-                <li>Imported: {{result.importedSlots}}</li>
-                <li>Ignored: {{result.ignoredSlots}}</li>
-                <li>Invalid: {{result.invalidSlots}}</li>
+                <li>Importerade: {{result.importedSlots}}</li>
+                <li>Fanns redan: {{result.ignoredSlots}}</li>
+                <li>Felaktiga (ignorerades): {{result.invalidSlots}}</li>
             </ul>
-            <li>Bookings:</li>
+            <li>Bokningar:</li>
             <ul>
-                <li>Imported: {{result.importedBookings}}</li>
-                <li>Ignored: {{result.ignoredBookings}}</li>
-                <li>Invalid: {{result.invalidBookings}}</li>
+                <li>Importerade: {{result.importedBookings}}</li>
+                <li>Fanns redan: {{result.ignoredBookings}}</li>
+                <li>Felaktiga (ignorerades): {{result.invalidBookings}}</li>
             </ul>
         </ul>
 

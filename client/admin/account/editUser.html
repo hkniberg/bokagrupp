@@ -1,31 +1,31 @@
 <template name="editUser">
     <h1>{{userEmail _id}}</h1>
 
-    User type:
+    Får administrera:
 
     <div class="radio">
         <label>
             <input type="radio" name="role" value="" {{noRoleChecked}}>
-            No role
+            Inget
         </label>
     </div>
 
     <div class="radio">
         <label>
             <input type="radio" name="role" value="courseAdmin" {{courseAdminChecked}}>
-            Course admin
+            Kurser
         </label>
     </div>
 
     <div class="radio">
         <label>
             <input type="radio" name="role" value="superUser" {{superUserChecked}}>
-            Super user
+            Allt
         </label>
     </div>
 
     {{#unless userIsMe}}
-        <button class="btn btn-danger deleteButton">Delete user</button>
+        <button class="btn btn-danger deleteButton">Radera användaren</button>
     {{/unless}}
 
 </template>

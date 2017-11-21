@@ -12,7 +12,9 @@ Template.courses.helpers({
       fields: [
         courseShortNameField(),
         {key: "name", label: "Namn"}
-      ]
+      ],
+      rowsPerPage: 20,
+      showNavigation: "auto"
     }
   }
 
