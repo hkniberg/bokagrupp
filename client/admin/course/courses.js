@@ -11,7 +11,8 @@ Template.courses.helpers({
       collection: Courses,
       fields: [
         courseShortNameField(),
-        {key: "name", label: "Namn"}
+        {key: "name", label: "Namn"},
+        registrationUrlField()
       ],
       rowsPerPage: 20,
       showNavigation: "auto"
@@ -31,6 +32,14 @@ export function courseShortNameField() {
     return {
       href: '/admin/course/' + course.shortName,
       text: course.shortName
+    }
+  })
+}
+export function registrationUrlField() {
+  return linkField('registrationUrl', 'Anmälningssida', function(course) {
+    return {
+      href: course.registrationUrl(),
+      text: course.registrationUrl()
     }
   })
 }
