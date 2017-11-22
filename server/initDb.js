@@ -2,7 +2,7 @@
 export function initDb() {
   if (Meteor.users.find().count() === 0) {
     const password = "admin"
-    console.log("Adding 'admin@example.com' user with random password " + password);
+    console.log("Adding 'admin@example.com' user with password " + password);
 
 
     let _id = Accounts.createUser({

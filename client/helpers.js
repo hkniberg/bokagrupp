@@ -69,3 +69,15 @@ Template.registerHelper('formatDate', function (date) {
   return formatDate(date)
 })
 
+Template.registerHelper('courseRegistrationUrl', () => {
+  const course = Template.currentData()
+  return getUrlRelativeToCurrent("/courses/" + course.shortName)
+})
+
+export function getUrlRelativeToCurrent(path) {
+  const href = window.location.href //TODO
+  const pathname = window.location.pathname
+  const base = href.substring(0, href.length - pathname.length)
+  return base + path
+}
+

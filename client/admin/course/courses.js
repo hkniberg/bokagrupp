@@ -1,5 +1,6 @@
 import {Courses} from "../../../lib/collection"
 import {linkField} from "../../tableUtils";
+import {getUrlRelativeToCurrent} from "../../helpers";
 
 Template.courses.helpers({
   courses() {
@@ -36,10 +37,14 @@ export function courseShortNameField() {
   })
 }
 export function registrationUrlField() {
+
   return linkField('registrationUrl', 'Anmälningssida', function(course) {
+    const url = getUrlRelativeToCurrent("/courses/" + course.shortName)
+
+
     return {
-      href: course.registrationUrl(),
-      text: course.registrationUrl()
+      href: url,
+      text: url
     }
   })
 }
