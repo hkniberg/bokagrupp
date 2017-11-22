@@ -6,7 +6,7 @@
             Medlemsnummer: {{membershipNumber}}
         </p>
 
-        {{#autoForm collection=Bookings id="enterContactInfoForm" type="method" meteormethod="addBooking"}}
+        {{#autoForm collection=Bookings id="enterContactInfoForm" type="method" meteormethod="addBookingAndSendEmail"}}
             {{> afQuickField name='slotId' type='hidden' value=_id}}
             {{> afQuickField name='levelId' type='hidden' value=level._id}}
             {{> afQuickField name='courseId' type='hidden' value=course._id}}
