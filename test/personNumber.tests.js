@@ -54,5 +54,9 @@ describe('PersonNumber', function() {
     const today = new Date("1974-02-17 00:10")
     expect(pn.getAge(today)).to.equal(1)
   })
+  it('toString', function() {
+    const pn = new PersonNumber("7302170019")
+    expect(pn.toString()).to.equal("19730217-0019")
+  })
 
 })
