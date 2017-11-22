@@ -1,3 +1,7 @@
+
+
+
+
 AutoForm.addHooks(['membershipNumberForm'], {
   onSubmit: function(insertDoc, updateDoc, currentDoc) {
     console.log("onSubmit")
@@ -17,13 +21,31 @@ AutoForm.addHooks(['membershipNumberForm'], {
 
 Template.enterMembershipNumber.helpers({
   membershipNumberSchema() {
-    return new SimpleSchema({
+    const slot = Template.currentData()
+    const course = slot.course()
+    const courseId = course._id
+    let schema = new SimpleSchema({
       membershipNumber: {
         type: String,
         label: "Barnets medlemsnummer",
         min: 6,
-        max: 7
+        max: 7,
+        custom: function() {
+          const membershipNumber = this.value
+
+          //Ensure that the membership number isn't used by someone else
+          //Since we don't have access to all membership numbers on the client,
+          //we do this server-side
+          if (Meteor.isClient && this.isSet) {
+            Meteor.call("isDuplicateMembershipNumber", membershipNumber, courseId, function (error, result) {
+              if (result) {
+                schema.namedContext("membershipNumberForm").addInvalidKeys([{name: "childMembershipNumber", type: "duplicateMembershipNumber"}]);
+              }
+            });
+          }
+        }
       }
     })
+    return schema
   }
 })
