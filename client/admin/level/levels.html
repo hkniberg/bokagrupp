@@ -21,6 +21,13 @@
                     {{> inPlace collection=Levels field="description" doc=this}}
                     {{> inPlace collection=Levels field="minAge" doc=this}}
                     {{> inPlace collection=Levels field="maxAge" doc=this}}
+                    <td>
+                        <a href="/admin/course/{{../shortName}}">{{bookingCount}}</a>
+                        {{#unless bookingCount}}
+                            <button style="margin-left: 5px;" data-levelid="{{_id}}" class="btn btn-xs btn-danger removeLevelButton">Radera nivå</button>
+                        {{/unless}}
+                    </td>
+
                 </tr>
             {{/each}}
 
