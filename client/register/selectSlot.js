@@ -4,7 +4,6 @@ import {getSlotsForCourse} from "../../lib/methods/slotMethods";
 
 Template.selectSlot.helpers({
   course() {
-    console.log("data", Template.currentData())
     return Template.currentData()
   },
 

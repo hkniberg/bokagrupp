@@ -14,7 +14,6 @@ Template.printBookings.helpers({
   bookings() {
     const slot = Template.currentData()
     const bookings = getBookingsForSlot(slot._id)
-    console.log("Booking for slot " + slot.time)
     return bookings
   }
 })
