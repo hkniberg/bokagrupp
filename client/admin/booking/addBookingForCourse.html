@@ -7,7 +7,7 @@
     </div>
 
     {{#if slotId}}
-        {{#autoForm collection=Bookings id="addBookingForCourseForm" type="method" meteormethod="addBooking" }}
+        {{#autoForm collection=Bookings id="addBookingForCourseForm" type="method" meteormethod="addBookingWithoutValidation" }}
             {{> afQuickField name='slotId' type="hidden" value=slotId}}
             {{> afQuickField name='levelId' type="hidden" value=levelId}}
             {{> afQuickField name='courseId' type="hidden" value=courseId}}
