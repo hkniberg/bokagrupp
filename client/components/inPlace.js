@@ -1,4 +1,8 @@
 import {Courses, Levels, Slots, Bookings} from "../../lib/collection"
+import {getBookingsSchemaForAdmin} from "../../lib/schemas/bookingsSchemaForAdmin";
+import {getSlotsSchema} from "../../lib/schemas/slotsSchema";
+import {getLevelsSchema} from "../../lib/schemas/levelsSchema";
+import {getCoursesSchema} from "../../lib/schemas/coursesSchema";
 
 let counter = 0
 
@@ -14,22 +18,33 @@ Template.inPlace.onRendered(function() {
 })
 
 Template.inPlace.helpers({
-  collection() {
+  schema() {
     const data = Template.currentData()
-    return data.collection
+    const collection = data.collection
+    if (collection == Courses) {
+      return getCoursesSchema()
+    } else if (collection == Levels) {
+      return getLevelsSchema()
+    } else if (collection == Slots) {
+      return getSlotsSchema()
+    } else if (collection == Bookings) {
+      return getBookingsSchemaForAdmin()
+    } else {
+      throw new Error("Invalid collection for inPlace: " + collection)
+    }
   },
 
   methodName() {
     const data = Template.currentData()
     const collection = data.collection
     if (collection == Courses) {
-      return "updateCourse"
+      return "updateCourseWithoutValidation"
     } else if (collection == Levels) {
-        return "updateLevel"
+        return "updateLevelWithoutValidation"
     } else if (collection == Slots) {
-      return "updateSlot"
+      return "updateSlotWithoutValidation"
     } else if (collection == Bookings) {
-      return "updateBooking"
+      return "updateBookingWithoutValidation"
     } else {
       throw new Error("Invalid collection for inPlace: " + collection)
     }

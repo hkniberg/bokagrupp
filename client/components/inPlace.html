@@ -9,7 +9,7 @@ Context should be something like:
 <template name="inPlace">
     {{#if editing}}
         <td>
-        {{#autoForm collection=collection id=formId doc=doc type="method-update" meteormethod=methodName autosave=true}}
+        {{#autoForm schema=schema id=formId doc=doc type="method-update" meteormethod=methodName autosave=true}}
             {{> afFieldInput name=field}}
             {{#if afFieldIsInvalid name=field}}
                 <span class="text-danger">{{afFieldMessage name=field}}</span>

@@ -1,6 +1,7 @@
 import {getBooking} from "../../../lib/methods/bookingMethods";
 import {getCourse} from "../../../lib/methods/courseMethods";
 import {getSlot} from "../../../lib/methods/slotMethods";
+import {getBookingsSchemaForAdmin} from "../../../lib/schemas/bookingsSchemaForAdmin";
 
 
 
@@ -29,6 +30,10 @@ Template.addBookingForCourse.helpers({
   courseId() {
     const course = Template.currentData()
     return course._id
+  },
+  
+  schema() {
+    return getBookingsSchemaForAdmin()
   }
 })
 
