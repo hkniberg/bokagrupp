@@ -7,6 +7,10 @@ describe('PersonNumber', function() {
   it('create', function() {
     new PersonNumber("2017")
   })
+  it('empty personnumber', function() {
+    const pn = new PersonNumber()
+    expect(pn.valid).to.equal(false)
+  })
   it('invalid personnumber', function() {
     const pn = new PersonNumber("2017")
     expect(pn.valid).to.equal(false)
@@ -57,6 +61,21 @@ describe('PersonNumber', function() {
   it('toString', function() {
     const pn = new PersonNumber("7302170019")
     expect(pn.toString()).to.equal("19730217-0019")
+  })
+  it('genderMale', function() {
+    const pn = new PersonNumber("197302170019") //male
+    expect(pn.isMale()).to.be.true
+    expect(pn.isFemale()).to.be.false
+  })
+  it('genderFemale', function() {
+    const pn = new PersonNumber("200508075785") //female
+    expect(pn.isMale()).to.be.false
+    expect(pn.isFemale()).to.be.true
+  })
+  it('genderUnknown', function() {
+    const pn = new PersonNumber("19700807714") //invalid PN
+    expect(pn.isMale()).to.be.false
+    expect(pn.isFemale()).to.be.false
   })
 
 })
