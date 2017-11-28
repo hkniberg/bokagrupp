@@ -1,20 +1,9 @@
 import {getLevelsForCourse} from "../../../lib/methods/levelMethods";
 import {getSlotsForCourse} from "../../../lib/methods/slotMethods";
 import {getSlot} from "../../../lib/methods/slotMethods";
+import {getBookingsForCourse} from "../../../lib/methods/bookingMethods";
 
 Template.viewCourse.helpers({
-  levelSelectValues() {
-    const course = Template.currentData()
-    const levels = getLevelsForCourse(course._id)
-
-    //Create an options list based on those levels
-    let options = []
-    levels.forEach(function (level) {
-      options.push({label: level.name, value: level._id})
-    })
-    return options
-  },
-
   levels() {
     const course = Template.currentData()
     return getLevelsForCourse(course._id)
@@ -23,6 +12,11 @@ Template.viewCourse.helpers({
   slots() {
     const course = Template.currentData()
     return getSlotsForCourse(course._id)
+  },
+
+  bookings() {
+    const course = Template.currentData()
+    return getBookingsForCourse(course._id)
   },
 
   selectedDatePeriod() {
@@ -35,7 +29,7 @@ Template.viewCourse.events({
     const course = Template.currentData()
     sweetAlert({
       title: "Är du säker?",
-      text: "Vill du verkligen ta bort kursen?",
+      text: "Vill du verkligen ta bort kursen? Alla nivåer och grupper kommer försvinna!",
       type: "warning",
       confirmButtonColor: "red",
       confirmButtonText: "Japp! Bort med kursen!",
@@ -43,22 +37,6 @@ Template.viewCourse.events({
     }, function(){
       Meteor.call("removeCourse", course._id)
       Router.go("/admin/courses")
-    });
-  },
-
-  "click .removeSlotButton"(event) {
-    const slotId = $(event.target).data("slotid")
-    const slot = getSlot(slotId)
-    console.log("slotId", slotId)
-    sweetAlert({
-      title: "Är du säker?",
-      text: "Vill du verkligen ta bort gruppen " + slot.level().name + " " + slot.datePeriod + " " + slot.time + "?",
-      type: "warning",
-      confirmButtonColor: "red",
-      confirmButtonText: "Japp! Bort med gruppen!",
-      showCancelButton: true
-    }, function(){
-      Meteor.call("removeSlot", slotId)
     });
   },
 

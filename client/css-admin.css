@@ -94,3 +94,15 @@
 .inPlaceField {
     cursor: pointer;
 }
+
+.badge-success {
+    background-color: green;
+}
+
+.badge-danger {
+    background-color: red;
+}
+
+.badge-warning {
+    background-color: #ffb37a;
+}

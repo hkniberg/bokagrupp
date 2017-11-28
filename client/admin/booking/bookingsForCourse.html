@@ -1,26 +1,4 @@
 <template name="bookingsForCourse">
-    <h1>Anmälningar till <a href="/admin/course/{{shortName}}">{{name}}</a></h1>
-
-    <ul>
-        <li>Publik anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a></li>
-        <li>Det finns just nu <a href="/admin/bookings/{{shortName}}">{{bookingCount}} anmälda</a> (av max {{bookingLimit}})</li>
-        <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
-        <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
-
-        <li>
-            <a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a>
-        </li>
-        <li><a href="/admin/export/{{shortName}}" target="export">Exportera till Excel</a></li>
-        <li>
-            Skriv ut deltagarlista för: {{> datePeriodSelect}}
-            {{#if selectedDatePeriod}}
-                <button class="button btn-success btn-sm printBookingsButton">Skriv ut</button>
-            {{/if}}
-        </li>
-    </ul>
-
-
-
     {{#if slots.count}}
 
         {{#each slots}}

@@ -7,7 +7,7 @@ AutoForm.addHooks(['changeSlotForm'], {
     const booking = getBooking(bookingId)
     const course = getCourse(booking.courseId)
 
-    Router.go("/admin/bookings/" + course.shortName)
+    Router.go("/admin/course/" + course.shortName)
   }
 })
 

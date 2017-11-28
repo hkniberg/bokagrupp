@@ -1,16 +1,48 @@
 <template name="viewCourse">
-    <h1>{{name}}</h1>
+
+    <h1>
+        {{name}}
+    </h1>
+
+    {{#if levels.count}}
+        {{#if slots.count}}
+            {{#if hasStarted}}
+                <span class="badge badge-warning">Stängd, kursen har startat</span>
+            {{else}}
+                {{#if isFull}}
+                    <span class="badge badge-warning">Fullbokad</span>
+                {{else}}
+                    <span class="badge badge-success">Öppen för anmälningar</span>
+                {{/if}}
+            {{/if}}
+        {{else}}
+            <span class="badge badge-danger">Inga grupper</span>
+        {{/if}}
+    {{else}}
+        <span class="badge badge-danger">Inga nivåer</span>
+    {{/if}}
 
     <ul>
-        <li>Publik anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a></li>
-        <li>Det finns just nu <a href="/admin/bookings/{{shortName}}">{{bookingCount}} anmälda</a> (av max {{bookingLimit}})</li>
-
+        {{#if hasStarted}}
+            <li>Kursen startade <b>{{formatDate startDate}}</b></li>
+        {{else}}
+            <li>Kursen startar <b>{{formatDate startDate}}</b></li>
+        {{/if}}
+        <li>
+            Publik anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a>
+        </li>
         {{#if slots.count}}
             <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
         {{/if}}
 
         <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
-        <li><a href="/admin/course/{{shortName}}/levels">Redigera nivåer</a></li>
+        {{#if levels.count}}
+            <li><a href="/admin/course/{{shortName}}/levels">Redigera nivåer</a></li>
+        {{/if}}
+
+        {{#if slots.count}}
+            <li><a href="/admin/course/{{shortName}}/slots">Redigera grupper</a></li>
+        {{/if}}
 
         {{#if slots.count}}
             <li><a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a></li>
@@ -24,56 +56,49 @@
         {{/if}}
     </ul>
 
-    {{#if slots.count}}
-        <h2>Grupper</h2>
-
-        <table class="data-table">
-            <tr>
-                <th>Nivå</th>
-                <th>Datumperiod</th>
-                <th>Tid</th>
-                <th>Max platser</th>
-                <th>Anmälda</th>
-            </tr>
-
-            {{#each slots}}
-                <tr>
-                    <td>{{levelName}}</td>
-                    {{> inPlace collection=Slots field="datePeriod" doc=this}}
-                    {{> inPlace collection=Slots field="time" doc=this}}
-                    {{> inPlace collection=Slots field="limit" doc=this}}
-                    <td>
-                        <a href="/admin/bookings/{{../shortName}}">{{bookingCount}}</a>
-                        {{#unless bookingCount}}
-                            <button style="margin-left: 5px;" data-slotid="{{_id}}" class="btn btn-xs btn-danger removeSlotButton">Radera grupp</button>
-                        {{/unless}}
-                    </td>
-                </tr>
-            {{/each}}
-        </table>
-
-    {{/if}}
-
     {{#if levels.count}}
-        <div class="well">
-            <h2>Skapa ny grupp</h2>
+        {{#if slots.count}}
+            {{#if bookings.count}}
+                <h2>{{bookings.count}} anmälningar</h2>
 
-            {{#autoForm collection=Slots id="addSlotForm" type="method" meteormethod="addSlot"}}
-                {{> afQuickField name='courseId' type='hidden' value=_id}}
-                {{> afQuickField name='levelId' options=levelSelectValues }}
-                {{> afQuickField name='datePeriod'}}
-                {{> afQuickField name='time'}}
-                {{> afQuickField name='limit'}}
-                <button type="submit" class="btn btn-primary">Skapa grupp</button>
-            {{/autoForm}}
+                {{#if isFull}}
+                    <div class="slot-full-message">Kursen är fullbokad!</div>
+                {{else}}
+                    <div class="slot-spaces-left">Totalt {{availableCount}} platser kvar</div>
+                {{/if}}
 
-        </div>
+                {{> bookingsForCourse}}
+
+            {{else}}
+                {{#if hasStarted}}
+                    <p class="alert alert-danger">
+                        Konstigt! Kursen har startat, men det finns ju inga anmälda!<br>
+                    </p>
+                {{else}}
+                    <p class="alert alert-success">
+                        Grattis, kursen är redo! Inga anmälda ännu dock. <br>
+                        Folk kan anmäla sig på <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a>
+                    </p>
+                {{/if}}
+            {{/if}}
+        {{else}}
+            <p class="alert alert-warning">
+                Grattis, din kurs har nivåer!<br>
+                Nästa grej är att <a href="/admin/course/{{shortName}}/slots">lägga upp några grupper.</a>.
+            </p>
+        {{/if}}
     {{else}}
-        <p class="alert alert-danger">Skapa minst en nivå för att kunna lägga upp grupper här.</p>
+        <p class="alert alert-warning">
+            Grattis, din kurs är skapad!<br>
+            Nu vore det kanon om du kunde <a href="/admin/course/{{shortName}}/levels">lägga upp några nivåer</a>.
+        </p>
     {{/if}}
 
-    {{#unless bookingCount}}
-        <button class="btn btn-danger removeButton">Ta bort kurs</button>
+
+    {{#unless bookings.count}}
+        <button class="btn btn-danger removeButton">Ta bort kursen</button>
     {{/unless}}
+
+
 
 </template>
