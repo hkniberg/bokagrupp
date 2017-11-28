@@ -2,7 +2,7 @@
     <h1>{{name}}</h1>
 
     <ul>
-        <li>Anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a></li>
+        <li>Publik anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a></li>
         <li>Det finns just nu <a href="/admin/bookings/{{shortName}}">{{bookingCount}} anmälda</a> (av max {{bookingLimit}})</li>
         <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
         <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
@@ -61,6 +61,8 @@
             {{/autoForm}}
 
         </div>
+    {{else}}
+        <p class="alert alert-danger">Skapa minst en nivå för att kunna lägga upp grupper här.</p>
     {{/if}}
 
     {{#unless bookingCount}}

@@ -2,41 +2,23 @@
     <h1>Anmälningar till <a href="/admin/course/{{shortName}}">{{name}}</a></h1>
 
     <ul>
-        <li>
-            Publik anmälningssida:
-            <a href="{{registrationUrl}}">{{registrationUrl}}</a>
-        </li>
-        <li>
-            Det finns just nu <b>{{bookingCount}}</b> anmälda
-            (av max {{bookingLimit}}).
-        </li>
+        <li>Publik anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a></li>
+        <li>Det finns just nu <a href="/admin/bookings/{{shortName}}">{{bookingCount}} anmälda</a> (av max {{bookingLimit}})</li>
+        <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
+        <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
+
         <li>
             <a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a>
         </li>
         <li>
             <a href="/admin/export/{{shortName}}">Exportera till excel</a>
         </li>
-        <!-- TODO
         <li>
-            <%= link_to 'Lägg upp en ny anmälan manuellt', "/admin/bookings/new?course=#{@course.id}" %>
-            <%= raw tip("I normalfallet bör du använda den publika anmälningssidan, eftersom felhanteringen är bättre där.") %>
+            Skriv ut deltagarlista för: {{> datePeriodSelect}}
+            {{#if selectedDatePeriod}}
+                <button class="button btn-success btn-sm printBookingsButton">Skriv ut</button>
+            {{/if}}
         </li>
-        -->
-
-        <!--
-        TODO
-        <li>
-            <form action="/admin/print_bookings">
-                <input type="hidden" name="course" value="<%=@course.id%>">
-                Skriv ut deltagarlista för <select name="date_period">
-                <% @course.slot_date_periods.each do |date_period| %>
-                <option value="<%=date_period%>"><%= date_period %></option>
-                <% end %>
-            </select>
-                <input type="submit" value="Skriv ut">
-            </form>
-        </li>
-        -->
     </ul>
 
 
@@ -59,10 +41,11 @@
                                 <th>Efternamn</th>
                                 <th>Betalat?</th>
                                 <th>Personnummer</th>
-                                <th>Postnummer</th>
-                                <th>Medlemsnummer</th>
+                                <th>Postnr</th>
+                                <th>Medlemsnr</th>
                                 <th>Epost</th>
                                 <th>Telefon</th>
+                                <th>Datum</th>
                                 <th>Kommentar</th>
                             </tr>
 
@@ -77,6 +60,7 @@
                                     {{> inPlace collection=Bookings field="childMembershipNumber" doc=this}}
                                     {{> inPlace collection=Bookings field="parentEmail" doc=this}}
                                     {{> inPlace collection=Bookings field="parentPhone" doc=this}}
+                                    <td>{{formatDate creationTime}}</td>
                                     {{> inPlace collection=Bookings field="comment" doc=this}}
                                     <td>
                                         <button class="btn btn-warning btn-xs changeSlotButton" data-bookingid="{{_id}}">Byt grupp</button>
