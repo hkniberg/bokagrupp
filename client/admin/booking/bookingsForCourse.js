@@ -1,6 +1,6 @@
 import {getBooking} from "../../../lib/methods/bookingMethods";
 Template.bookingsForCourse.events({
-  "click .removeButton"(event) {
+  "click .removeBookingButton"(event) {
     const bookingId = $(event.target).data("bookingid")
     const booking = getBooking(bookingId)
     sweetAlert({

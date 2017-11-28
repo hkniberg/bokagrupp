@@ -25,7 +25,7 @@ Template.viewCourse.helpers({
 })
 
 Template.viewCourse.events({
-  "click .removeButton"() {
+  "click .removeCourseButton"() {
     const course = Template.currentData()
     sweetAlert({
       title: "Är du säker?",
