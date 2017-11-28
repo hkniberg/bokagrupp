@@ -14,7 +14,7 @@
 
         {{#if slots.count}}
             <li><a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a></li>
-            <li><a href="/admin/export/{{shortName}}">Exportera till Excel</a></li>
+            <li><a href="/admin/export/{{shortName}}" target="export">Exportera till Excel</a></li>
             <li>
                 Skriv ut deltagarlista för: {{> datePeriodSelect}}
                 {{#if selectedDatePeriod}}
