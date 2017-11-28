@@ -4,17 +4,24 @@
     <ul>
         <li>Publik anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a></li>
         <li>Det finns just nu <a href="/admin/bookings/{{shortName}}">{{bookingCount}} anmälda</a> (av max {{bookingLimit}})</li>
-        <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
+
+        {{#if slots.count}}
+            <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
+        {{/if}}
+
         <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
         <li><a href="/admin/course/{{shortName}}/levels">Redigera nivåer</a></li>
-        <li><a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a></li>
-        <li><a href="/admin/export/{{shortName}}">Exportera till Excel</a></li>
-        <li>
-            Skriv ut deltagarlista för: {{> datePeriodSelect}}
-            {{#if selectedDatePeriod}}
-                <button class="button btn-success btn-sm printBookingsButton">Skriv ut</button>
-            {{/if}}
-        </li>
+
+        {{#if slots.count}}
+            <li><a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a></li>
+            <li><a href="/admin/export/{{shortName}}">Exportera till Excel</a></li>
+            <li>
+                Skriv ut deltagarlista för: {{> datePeriodSelect}}
+                {{#if selectedDatePeriod}}
+                    <button class="button btn-success btn-sm printBookingsButton">Skriv ut</button>
+                {{/if}}
+            </li>
+        {{/if}}
     </ul>
 
     {{#if slots.count}}
