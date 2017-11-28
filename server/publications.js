@@ -6,7 +6,6 @@ import {getBookingsForCourseAndDatePeriod} from "../lib/methods/bookingMethods";
 
 Meteor.publish('users', function() {
   assertSuperUser(this.userId)
-  console.log("publish users")
   return Meteor.users.find()
 })
 
@@ -20,39 +19,49 @@ Meteor.publish('courses', function() {
 })
 
 Meteor.publish('course', function(shortName) {
-  const course = getCourseWithShortName(shortName)
-  return Courses.find({_id: course._id})
+  return Courses.find({shortName: shortName})
 })
 
 Meteor.publish('levelsForCourse', function(courseShortName) {
-  const course = getCourseWithShortName(courseShortName)
-  return [
-    Courses.find({_id: course._id}),
-    Levels.find({courseId: course._id})
-  ]
+  const course = getCourseWithShortName(courseShortName, false)
+  if (course) {
+    return [
+      Courses.find({_id: course._id}),
+      Levels.find({courseId: course._id})
+    ]
+  } else {
+    return []
+  }
 })
 
 Meteor.publish('slotsForCourse', function(courseShortName) {
-  const course = getCourseWithShortName(courseShortName)
-  return [
-    Courses.find({_id: course._id}),
-    Slots.find({courseId: course._id})
-  ]
+  const course = getCourseWithShortName(courseShortName, false)
+  if (course) {
+    return [
+      Courses.find({_id: course._id}),
+      Slots.find({courseId: course._id})
+    ]
+  } else {
+    return []
+  }
 })
 
 Meteor.publish('bookingsForCourse', function(courseShortName) {
   assertAdmin(this.userId)
-  const course = getCourseWithShortName(courseShortName)
-  return [
-    Courses.find({_id: course._id}),
-    Levels.find({courseId: course._id}),
-    Slots.find({courseId: course._id}),
-    Bookings.find({courseId: course._id})
-  ]
+  const course = getCourseWithShortName(courseShortName, false)
+  if (course) {
+    return [
+      Courses.find({_id: course._id}),
+      Levels.find({courseId: course._id}),
+      Slots.find({courseId: course._id}),
+      Bookings.find({courseId: course._id})
+    ]
+  } else {
+    return []
+  }
 })
 
 Meteor.publish('bookingsForCourseAndDatePeriod', function(courseShortName, datePeriod) {
-  console.log("publication opened: bookingsForCourseAndDatePeriod")
   assertAdmin(this.userId)
   const course = getCourseWithShortName(courseShortName)
   return [
@@ -89,9 +98,11 @@ Meteor.publish('booking', function(bookingId) {
   ]
 })
 
-function getCourseWithShortName(shortName) {
+function getCourseWithShortName(shortName, validate=true) {
   const course = Courses.findOne({shortName: shortName})
-  console.assert(course, "Can't find a course with shortName " + shortName)
+  if (validate) {
+    console.assert(course, "Can't find a course with shortName " + shortName)
+  }
   return course
 
 }

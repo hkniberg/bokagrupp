@@ -3,6 +3,11 @@ import {getSlotsForLevel} from "../../lib/methods/slotMethods";
 import {getSlotsForCourse} from "../../lib/methods/slotMethods";
 
 Template.selectSlot.helpers({
+  course() {
+    console.log("data", Template.currentData())
+    return Template.currentData()
+  },
+
   levels() {
     const course = Template.currentData()
     return getLevelsForCourse(course._id)
