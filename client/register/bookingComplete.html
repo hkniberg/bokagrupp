@@ -11,7 +11,9 @@
         Gör en <a href="/courses/{{course.shortName}}">ny bokning</a> <br>
     </p>
 
-    <div>
-        <a href="{{course.homeUrl}}">Till skidskolans hemsida</a>
-    </div>
+    {{#if course.homeUrl}}
+        <div>
+            <a href="{{course.homeUrlWithHttpInFront}}">Till skidskolans hemsida</a>
+        </div>
+    {{/if}}
 </template>
