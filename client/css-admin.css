@@ -1,3 +1,7 @@
+.whiteBackground {
+    background-color: white;
+}
+
 .adminPage h1 {
     font-size: 24px;
     background-color: #ffffcc;
