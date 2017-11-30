@@ -1,10 +1,13 @@
-.skischoolInfoButton {
-    display: block;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    top: 30%;
+.pitch {
+    padding-top: 30%;
+    text-align: center;
+}
 
+.pitch p {
+    background-color: white;
+    opacity: 0.95;
+    border-radius: 10px;
+    font-size: 20px;
 }
 
 .somePadding {
