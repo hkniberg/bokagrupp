@@ -4,9 +4,23 @@
 </head>
 
 <template name="layout">
+    <body>
+        <div class="snow">
+            <div class="somePadding">
 
-    <div id="content" class="container-fluid">
-        {{> yield}}
-    </div>
+                {{#if logoFilePath}}
+                    <div class="logoFilePath">
+                        <img src="{{logoFilePath}}">
+                    </div>
+                {{/if}}
+
+                <div class="contentWrapper">
+                    <div id="content" class="container-fluid">
+                        {{> yield}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 
 </template>

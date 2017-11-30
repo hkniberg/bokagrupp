@@ -1,60 +1,73 @@
 <template name="viewCourse">
-
     <h1>
         {{name}}
     </h1>
 
-    {{#if levels.count}}
-        {{#if slots.count}}
-            {{#if hasStarted}}
-                <span class="badge badge-warning">Stängd, kursen har startat</span>
-            {{else}}
-                {{#if isFull}}
-                    <span class="badge badge-warning">Fullbokad</span>
+    <div class="row">
+        <div class="col-sm-6">
+            {{#if levels.count}}
+                {{#if slots.count}}
+                    {{#if hasStarted}}
+                        <span class="badge badge-warning">Stängd, kursen har startat</span>
+                    {{else}}
+                        {{#if isFull}}
+                            <span class="badge badge-warning">Fullbokad</span>
+                        {{else}}
+                            <span class="badge badge-success">Öppen för anmälningar</span>
+                        {{/if}}
+                    {{/if}}
                 {{else}}
-                    <span class="badge badge-success">Öppen för anmälningar</span>
+                    <span class="badge badge-danger">Inga grupper</span>
                 {{/if}}
+            {{else}}
+                <span class="badge badge-danger">Inga nivåer</span>
             {{/if}}
-        {{else}}
-            <span class="badge badge-danger">Inga grupper</span>
-        {{/if}}
-    {{else}}
-        <span class="badge badge-danger">Inga nivåer</span>
-    {{/if}}
 
-    <ul>
-        {{#if hasStarted}}
-            <li>Kursen startade <b>{{formatDate startDate}}</b></li>
-        {{else}}
-            <li>Kursen startar <b>{{formatDate startDate}}</b></li>
-        {{/if}}
-        <li>
-            Publik anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a>
-        </li>
-        {{#if slots.count}}
-            <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
-        {{/if}}
-
-        <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
-        {{#if levels.count}}
-            <li><a href="/admin/course/{{shortName}}/levels">Redigera nivåer</a></li>
-        {{/if}}
-
-        {{#if slots.count}}
-            <li><a href="/admin/course/{{shortName}}/slots">Redigera grupper</a></li>
-        {{/if}}
-
-        {{#if slots.count}}
-            <li><a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a></li>
-            <li><a href="/admin/export/{{shortName}}" target="export">Exportera till Excel</a></li>
-            <li>
-                Skriv ut deltagarlista för: {{> datePeriodSelect}}
-                {{#if selectedDatePeriod}}
-                    <button class="button btn-success btn-sm printBookingsButton">Skriv ut</button>
+            <ul>
+                {{#if hasStarted}}
+                    <li>Kursen startade <b>{{formatDate startDate}}</b></li>
+                {{else}}
+                    <li>Kursen startar <b>{{formatDate startDate}}</b></li>
                 {{/if}}
-            </li>
-        {{/if}}
-    </ul>
+                <li>
+                    Publik anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a>
+                </li>
+                {{#if slots.count}}
+                    <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
+                {{/if}}
+
+                <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
+                {{#if levels.count}}
+                    <li><a href="/admin/course/{{shortName}}/levels">Redigera nivåer</a></li>
+                {{/if}}
+
+                {{#if slots.count}}
+                    <li><a href="/admin/course/{{shortName}}/slots">Redigera grupper</a></li>
+                {{/if}}
+
+                {{#if slots.count}}
+                    <li><a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a></li>
+                    <li><a href="/admin/export/{{shortName}}" target="export">Exportera till Excel</a></li>
+                    <li>
+                        Skriv ut deltagarlista för: {{> datePeriodSelect}}
+                        {{#if selectedDatePeriod}}
+                            <button class="button btn-success btn-sm printBookingsButton">Skriv ut</button>
+                        {{/if}}
+                    </li>
+                {{/if}}
+            </ul>
+
+        </div>
+
+        <div class="col-sm-6">
+            {{#if logoFile}}
+                <div class="logo">
+                    <img src="{{logoFilePath}}">
+                </div>
+            {{/if}}
+        </div>
+
+    </div>
 
     {{#if levels.count}}
         {{#if slots.count}}
@@ -98,6 +111,7 @@
     {{#unless bookings.count}}
         <button class="btn btn-danger removeCourseButton">Ta bort kursen</button>
     {{/unless}}
+
 
 
 

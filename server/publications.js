@@ -1,4 +1,5 @@
 import {Courses, Levels, Slots, Bookings} from "../lib/collection"
+import {Uploads} from "../lib/uploads"
 import {assertSuperUser} from "../lib/accounts"
 import {assertAdmin} from "../lib/accounts";
 import {getSlotsForCourseAndDatePeriod} from "../lib/methods/slotMethods";
@@ -19,7 +20,10 @@ Meteor.publish('courses', function() {
 })
 
 Meteor.publish('course', function(shortName) {
-  return Courses.find({shortName: shortName})
+  return [
+    Courses.find({shortName: shortName}),
+    Uploads.collection.find()
+  ]
 })
 
 Meteor.publish('levelsForCourse', function(courseShortName) {
@@ -27,7 +31,8 @@ Meteor.publish('levelsForCourse', function(courseShortName) {
   if (course) {
     return [
       Courses.find({_id: course._id}),
-      Levels.find({courseId: course._id})
+      Levels.find({courseId: course._id}),
+      Uploads.collection.find()
     ]
   } else {
     return []
@@ -39,7 +44,8 @@ Meteor.publish('slotsForCourse', function(courseShortName) {
   if (course) {
     return [
       Courses.find({_id: course._id}),
-      Slots.find({courseId: course._id})
+      Slots.find({courseId: course._id}),
+      Uploads.collection.find()
     ]
   } else {
     return []
@@ -54,7 +60,8 @@ Meteor.publish('bookingsForCourse', function(courseShortName) {
       Courses.find({_id: course._id}),
       Levels.find({courseId: course._id}),
       Slots.find({courseId: course._id}),
-      Bookings.find({courseId: course._id})
+      Bookings.find({courseId: course._id}),
+      Uploads.collection.find()
     ]
   } else {
     return []
@@ -68,7 +75,8 @@ Meteor.publish('bookingsForCourseAndDatePeriod', function(courseShortName, dateP
     Courses.find({_id: course._id}),
     Levels.find({courseId: course._id}),
     getSlotsForCourseAndDatePeriod(course._id, datePeriod),
-    getBookingsForCourseAndDatePeriod(course._id, datePeriod)
+    getBookingsForCourseAndDatePeriod(course._id, datePeriod),
+    Uploads.collection.find()
   ]
 })
 
@@ -80,7 +88,8 @@ Meteor.publish('slot', function(slotId) {
   return [
     Slots.find({_id: slot._id}),
     Levels.find({_id: level._id}),
-    Courses.find({_id: course._id})
+    Courses.find({_id: course._id}),
+    Uploads.collection.find()
   ]
 })
 
@@ -94,7 +103,8 @@ Meteor.publish('booking', function(bookingId) {
     Bookings.find({_id: booking._id}),
     Slots.find({courseId: course._id}),
     Levels.find({courseId: course._id}),
-    Courses.find({_id: course._id})
+    Courses.find({_id: course._id}),
+    Uploads.collection.find()
   ]
 })
 

@@ -2,6 +2,7 @@ import {getLevelsForCourse} from "../../../lib/methods/levelMethods";
 import {getSlotsForCourse} from "../../../lib/methods/slotMethods";
 import {getSlot} from "../../../lib/methods/slotMethods";
 import {getBookingsForCourse} from "../../../lib/methods/bookingMethods";
+import {getUploadUrl} from "../../../lib/uploads";
 
 Template.viewCourse.helpers({
   levels() {
@@ -21,6 +22,10 @@ Template.viewCourse.helpers({
 
   selectedDatePeriod() {
     return Session.get("selectedDatePeriod")
+  },
+
+  logoFilePath() {
+    return getUploadUrl(this.logoFile)
   }
 })
 
