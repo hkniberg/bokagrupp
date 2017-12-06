@@ -55,14 +55,11 @@ Meteor.publish('courses', function(orgShortName) {
  * For any other user, it's just my orgs.
  */
 Meteor.publish('orgs', function() {
-  console.log("subscribing to orgs")
   if (!this.userId) {
     console.log("Strange, user is not logged in, and still subscribing to orgs")
-    return null
+    return []
   }
-  const orgs = getMyOrgs(this.userId)
-  console.log("Found " + orgs.count() + " orgs for " + this.userId)
-  return orgs
+  return getMyOrgs(this.userId)
 })
 
 /**

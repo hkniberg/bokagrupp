@@ -1,10 +1,21 @@
 <template name="admin">
     {{#unless isAdmin}}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false">
+                {{userEmail}}
+                <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <!-- https://github.com/meteor-useraccounts/iron-routing -->
+                <li><a class="collapse-on-click" href="/change-password">Byt lösen</a>
+                </li>
+                <li><a class="collapse-on-click logout-link" href="#">Logga ut</a></li>
+            </ul>
+        </li>
+
         <p class="alert alert-danger">
             You don't have permissions to administrate anything here.
             Please contact the owner of this site and ask them to give you the necessary permissions.
         </p>
     {{/unless}}
-    Admin
-
 </template>

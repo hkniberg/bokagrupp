@@ -4,7 +4,7 @@ import {getSlotsForCourseAndDatePeriod} from "../../../lib/methods/slotMethods";
 Template.printBookings.helpers({
   slots() {
     const data = Template.currentData()
-    const course = getCourse()
+    const course = Courses.findOne({shortName: data.courseShortName})
     if (course) {
       return getSlotsForCourseAndDatePeriod(course._id, data.datePeriod)
     }
@@ -15,8 +15,3 @@ Template.printBookings.helpers({
     return getBookingsForSlot(slot._id)
   }
 })
-
-function getCourse() {
-  const data = Template.currentData()
-  return Courses.findOne({shortName: data.courseShortName})
-}

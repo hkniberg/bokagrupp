@@ -4,6 +4,16 @@
     {{#if importing}}
         <p class="alert alert-warning">Importerar...</p>
     {{else}}
+        <div>
+            <b>Importera till organisation:</b>
+            <select class="importToOrgSelect" style="margin-bottom: 10px;">
+                {{#each orgs}}
+                    <option value="{{_id}}">{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+
         <button class="btn btn-danger importButton">Importera data från gamla systemet</button>
         <div>Data som redan importerats kommer inte importeras igen</div>
     {{/if}}

@@ -12,6 +12,8 @@
         </div>
 
         {{> reactiveTable settings=tableSettings class="table table-striped table-bordered table-condensed"}}
+    {{else}}
+        <p class="alert alert-success">Grattis! Det finns inga obetalda anmälningar.</p>
     {{/if}}
 
 </template>
