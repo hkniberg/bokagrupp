@@ -1,8 +1,6 @@
 <template name="selectSlot">
     {{#unless course}}
-        <h1>Hoppsan!</h1>
-        <div class="text-danger">Aj då! Nu har du nog fått fel länk eller nåt, för denna kurs finns inte...</div>
-        <img src="https://media.giphy.com/media/oIWnsx5ZH9Vvi/giphy.gif">
+        {{> noSuchCourse}}
     {{else}}
 
         {{#unless hasSlots}}
@@ -94,9 +92,6 @@
         {{/unless}}
 
     {{/unless}}
-
-
-
 
 
 </template>

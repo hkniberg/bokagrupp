@@ -37,6 +37,14 @@ Meteor.publish('user', function(email) {
   return Meteor.users.find({"emails.0.address": email})
 })
 
+Meteor.publish('allCourseNames', function() {
+  return [
+    Orgs.find(),
+    Courses.find()
+  ]
+})
+
+
 Meteor.publish('courses', function(orgShortName) {
   console.log("subscribed to course for org", orgShortName)
   const org = getOrgWithShortName(orgShortName, false)
@@ -68,7 +76,10 @@ Meteor.publish('orgs', function() {
 Meteor.publish('courseName', function(orgShortName, courseShortName, includeBookings) {
   try {
     console.log("subscribing to courseName", orgShortName, courseShortName, includeBookings)
-    const course = getCourseWithOrgAndShortName(orgShortName, courseShortName)
+    const course = getCourseWithOrgAndShortName(orgShortName, courseShortName, false)
+    if (!course) {
+      return []
+    }
     const org = getOrgWithShortName(orgShortName)
     const cursors = []
     cursors.push(Orgs.find({_id: org._id}))

@@ -125,6 +125,9 @@ Template.registerHelper('coursePath', function (course) {
 })
 
 Template.registerHelper('courseRegistrationUrl', function (course) {
+  if (!course) {
+    course = Template.currentData()
+  }
   if (course) {
     return getUrlRelativeToCurrent(course.registrationPath())
   }
