@@ -46,7 +46,6 @@ Meteor.publish('allCourseNames', function() {
 
 
 Meteor.publish('courses', function(orgShortName) {
-  console.log("subscribed to course for org", orgShortName)
   const org = getOrgWithShortName(orgShortName, false)
   if (org) {
     return [
@@ -64,7 +63,6 @@ Meteor.publish('courses', function(orgShortName) {
  */
 Meteor.publish('orgs', function() {
   if (!this.userId) {
-    console.log("Strange, user is not logged in, and still subscribing to orgs")
     return []
   }
   return getMyOrgs(this.userId)
@@ -75,7 +73,6 @@ Meteor.publish('orgs', function() {
  */
 Meteor.publish('courseName', function(orgShortName, courseShortName, includeBookings) {
   try {
-    console.log("subscribing to courseName", orgShortName, courseShortName, includeBookings)
     const course = getCourseWithOrgAndShortName(orgShortName, courseShortName, false)
     if (!course) {
       return []
@@ -91,7 +88,6 @@ Meteor.publish('courseName', function(orgShortName, courseShortName, includeBook
       assertAdmin(this.userId, org._id)
       cursors.push(Bookings.find({courseId: course._id}))
     }
-    console.log("subscription course count: " + Courses.find({_id: course._id}).count())
 
     return cursors
 
@@ -213,9 +209,7 @@ function getMyOrgs(userId) {
     return Orgs.find()
   } else {
     const orgIds = Roles.getGroupsForUser(userId)
-    console.log("My orgs", orgIds)
     const orgs = Orgs.find({_id: {$in: orgIds}})
-    console.log(" => " + orgs.count() + "orgs found")
     return orgs
   }
 
