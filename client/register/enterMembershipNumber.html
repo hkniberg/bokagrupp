@@ -3,32 +3,19 @@
 
     <div class="col col-xs-6">
         <p>
-            För att kunna gå i denna skidskola behöver ditt barn vara medlem i Friluftsfrämjandet.
+            För att kunna gå i denna grupp behöver ditt barn vara medlem i Friluftsfrämjandet.
         </p>
 
         {{> quickForm schema=membershipNumberSchema id="membershipNumberForm" buttonContent="OK"}}
 
         <p>Inte medlem ännu? <a href="http://www.friluftsframjandet.se/bli_medlem">Ansök här</a></p>
 
-        <div>
-            <a href="{{course.homeUrlWithHttpInFront}}" target="ut">Till skidskolans hemsida</a>
-        </div>
-
+        {{> linkToCourseHomePage currentCourse}}
     </div>
 
 
     <div class="col col-xs-6">
-        <div class="slot">
-            <div class="level-name">
-                {{levelName}}
-            </div>
-            <div class="slot-time">
-                {{time}}
-            </div>
-            <div class="slot-date-period">
-                {{datePeriod}}
-            </div>
-        </div>
+        {{> currentBooking}}
     </div>
 
 

@@ -1,0 +1,10 @@
+<template name="viewOrg">
+    <h1>Organisation: {{name}}</h1>
+
+    <p><b>Kortnamn:</b> {{shortName}}</p>
+
+    {{#if isSuperUser}}
+        <div><button class="btn btn-success editOrgButton">Redigera organisationen</button></div>
+        <div><button class="btn btn-danger removeOrgButton">Ta bort organisationen</button></div>
+    {{/if}}
+</template>

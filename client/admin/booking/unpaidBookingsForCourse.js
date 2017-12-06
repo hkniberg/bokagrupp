@@ -1,4 +1,3 @@
-import {Bookings} from "../../../lib/collection"
 import {getUnpaidBookingsForCourse} from "../../../lib/methods/bookingMethods";
 
 Template.unpaidBookingsForCourse.helpers({

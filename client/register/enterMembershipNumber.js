@@ -1,33 +1,29 @@
+import {getCurrentBooking} from "./currentBooking";
+import {getPublicRouteToCourse} from "../../lib/router";
+import {updateCurrentBooking} from "../bookingSession";
+import {getCurrentCourse} from "../bookingSession";
 
-
-
-
-AutoForm.addHooks(['membershipNumberForm'], {
-  onSubmit: function(insertDoc, updateDoc, currentDoc) {
-    console.log("onSubmit")
-    // You must call this.done()!
-    //this.done(); // submitted successfully, call onSuccess
-    //this.done(new Error('foo')); // failed to submit, call onError with the provided error
-    //this.done(null, "foo"); // submitted successfully, call onSuccess with `result` arg set to "foo"
-    const membershipNumber = insertDoc.membershipNumber
-    Session.set("membershipNumber", membershipNumber)
-    this.done()
-    return false
-  },
-  onSuccess: function(formType, result) {
-    Router.go("/enterContactInfo")
-  }
+Template.enterMembershipNumber.onRendered(function() {
+  AutoForm.addHooks(['membershipNumberForm'], {
+    onSubmit: function(insertDoc, updateDoc, currentDoc) {
+      const membershipNumber = insertDoc.membershipNumber
+      updateCurrentBooking("membershipNumber", membershipNumber)
+      this.done()
+      return false
+    },
+    onSuccess: function(formType, result) {
+      const course = getCurrentCourse()
+      Router.go(getPublicRouteToCourse(course) + "/enterContactInfo")
+    }
+  })
 })
+
 
 let schema
 
 Template.enterMembershipNumber.helpers({
   membershipNumberSchema() {
-    const slot = Template.currentData()
-    if (!slot) {
-      return
-    }
-    const course = slot.course()
+    const course = getCurrentCourse()
     const courseId = course._id
     if (!schema) {
       schema = new SimpleSchema({

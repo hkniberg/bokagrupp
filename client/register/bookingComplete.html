@@ -8,12 +8,8 @@
     {{{course.paymentInstructions}}}
     <br>
     <p>
-        Gör en <a href="/courses/{{course.shortName}}">ny bokning</a> <br>
+        Gör en <a href="{{courseRegistrationUrl course}}">ny bokning</a> <br>
     </p>
 
-    {{#if course.homeUrl}}
-        <div>
-            <a href="{{course.homeUrlWithHttpInFront}}" target="ut">Till skidskolans hemsida</a>
-        </div>
-    {{/if}}
+    {{> linkToCourseHomePage course}}
 </template>

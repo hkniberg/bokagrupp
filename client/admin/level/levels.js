@@ -1,11 +1,20 @@
 import {Levels} from "../../../lib/collection"
 import {getLevel} from "../../../lib/methods/levelMethods";
+import {getAdminRouteToOrg} from "../../../lib/router";
 
 Template.levels.helpers({
   levels() {
     const course = Template.currentData()
     return Levels.find({courseId: course._id})
+  },
+
+  orgPath() {
+    const course = Template.currentData()
+    if (course) {
+      return getAdminRouteToOrg(course.org())
+    }
   }
+
 })
 
 Template.levels.events({
@@ -22,6 +31,6 @@ Template.levels.events({
     }, function(){
       Meteor.call("removeLevel", levelId)
     });
-  },
+  }
 
 })

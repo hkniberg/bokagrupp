@@ -1,16 +1,16 @@
 import {Courses} from "../../../lib/collection"
+import {getAdminRouteToCourse} from "../../../lib/router";
 
 AutoForm.addHooks(['editCourseForm'], {
   onSuccess: function(formType, result) {
     const courseId = this.docId
     const updatedCourse = Courses.findOne({_id: courseId})
-    Router.go("/admin/course/" + updatedCourse.shortName)
+    Router.go(getAdminRouteToCourse(updatedCourse))
   }
 })
 
 Template.editCourse.helpers({
   course() {
-    const course = Template.currentData()
-    return course
+    return Template.currentData()
   }
 })

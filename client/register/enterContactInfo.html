@@ -3,14 +3,12 @@
 
     <div class="col col-xs-6">
         <p>
-            Medlemsnummer: {{membershipNumber}}
+            Medlemsnummer: {{currentBooking.membershipNumber}}
         </p>
 
         {{#autoForm collection=Bookings id="enterContactInfoForm" type="method" meteormethod="addBookingAndSendEmail"}}
-            {{> afQuickField name='slotId' type='hidden' value=_id}}
-            {{> afQuickField name='levelId' type='hidden' value=level._id}}
-            {{> afQuickField name='courseId' type='hidden' value=course._id}}
-            {{> afQuickField name='childMembershipNumber' type='hidden' value=membershipNumber}}
+            {{> afQuickField name='slotId' type='hidden' value=currentSlot._id}}
+            {{> afQuickField name='childMembershipNumber' type='hidden' value=currentBooking.membershipNumber}}
 
             {{> afQuickField name='childFirstName'}}
             {{> afQuickField name='childLastName'}}
@@ -23,24 +21,14 @@
         {{/autoForm}}
 
         <div>
-            <a href="{{course.homeUrlWithHttpInFront}}" target="ut">Till skidskolans hemsida</a>
+            {{> linkToCourseHomePage currentCourse}}
         </div>
 
     </div>
 
 
     <div class="col col-xs-6">
-        <div class="slot">
-            <div class="level-name">
-                {{levelName}}
-            </div>
-            <div class="slot-time">
-                {{time}}
-            </div>
-            <div class="slot-date-period">
-                {{datePeriod}}
-            </div>
-        </div>
+        {{> currentBooking}}
     </div>
 
 </template>

@@ -7,5 +7,6 @@ if (process.env.MAIL_URL) {
   console.log("Warning: MAIL_URL isn't set, so I can't send booking confirmation emails.")
 }
 
+
 attachSchemas()
 initDb()

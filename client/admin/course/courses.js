@@ -24,24 +24,27 @@ Template.courses.helpers({
 
 Template.courses.events({
   "click .createButton"() {
-    Router.go("/admin/addCourse")
+    const org = Template.currentData()
+    Router.go("/admin/org/" + org.shortName + "/addCourse")
   }
 })
 
 export function courseShortNameField() {
-  return linkField('shortName', 'Kortnamn', function(course) {
-    return {
-      href: '/admin/course/' + course.shortName,
-      text: course.shortName
-    }
-  })
+  const org = Template.currentData()
+  if (org) {
+    return linkField('shortName', 'Kortnamn', function(course) {
+      return {
+        href: '/admin/org/' + org.shortName + '/course/' + course.shortName,
+        text: course.shortName
+      }
+    })
+  }
 }
 export function registrationUrlField() {
 
   return linkField('registrationUrl', 'Anmälningssida', function(course) {
-    const url = getUrlRelativeToCurrent("/courses/" + course.shortName)
-
-
+    const path = course.registrationPath()
+    const url = getUrlRelativeToCurrent(path)
     return {
       href: url,
       text: url

@@ -1,0 +1,6 @@
+<template name="editOrg">
+    <h1>Redigera organisation</h1>
+
+    {{> quickForm collection=Orgs id="editOrgForm" type="method-update" doc=org meteormethod="updateOrg" buttonContent="Spara organisation"}}
+
+</template>

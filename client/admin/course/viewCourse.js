@@ -1,10 +1,33 @@
 import {getLevelsForCourse} from "../../../lib/methods/levelMethods";
 import {getSlotsForCourse} from "../../../lib/methods/slotMethods";
-import {getSlot} from "../../../lib/methods/slotMethods";
 import {getBookingsForCourse} from "../../../lib/methods/bookingMethods";
 import {getUploadUrl} from "../../../lib/uploads";
+import {getAdminRouteToOrg} from "../../../lib/router";
+import {getAdminRouteToCourse} from "../../../lib/router";
 
 Template.viewCourse.helpers({
+  org() {
+    const course = Template.currentData()
+    if (course) {
+      return course.org()
+    }
+  },
+
+  orgPath() {
+    const course = Template.currentData()
+    if (course) {
+      return getAdminRouteToOrg(course.org())
+    }
+  },
+
+  coursePath() {
+    const course = Template.currentData()
+    if (course) {
+      const orgPath = getAdminRouteToOrg(course.org())
+      return orgPath + "/course/" + course.shortName
+    }
+  },
+
   levels() {
     const course = Template.currentData()
     return getLevelsForCourse(course._id)
@@ -41,13 +64,13 @@ Template.viewCourse.events({
       showCancelButton: true
     }, function(){
       Meteor.call("removeCourse", course._id)
-      Router.go("/admin/courses")
+      Router.go(getAdminRouteToOrg(course.org()) + "/courses")
     });
   },
 
   "click .printBookingsButton"() {
     const course = Template.currentData()
     const datePeriod = Session.get("selectedDatePeriod")
-    Router.go("/admin/printBookings/" + course.shortName + "/" + datePeriod)
+    Router.go(getAdminRouteToCourse(course) + "/print/" + datePeriod)
   }
 })

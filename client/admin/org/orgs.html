@@ -1,0 +1,10 @@
+<template name="orgs">
+    <h1>Organisationer</h1>
+
+    <button class="btn btn-success createButton">Skapa organisation</button>
+
+    {{#if orgs.count}}
+        {{> reactiveTable settings=tableSettings class="table table-striped table-bordered table-condensed"}}
+    {{/if}}
+
+</template>

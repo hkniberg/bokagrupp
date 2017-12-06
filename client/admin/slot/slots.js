@@ -1,12 +1,21 @@
 import {Slots} from "../../../lib/collection"
 import {getSlot} from "../../../lib/methods/slotMethods";
 import {getLevelsForCourse} from "../../../lib/methods/levelMethods";
+import {getAdminRouteToOrg} from "../../../lib/router";
 
 Template.slots.helpers({
   slots() {
     const course = Template.currentData()
     return Slots.find({courseId: course._id})
   },
+
+  orgPath() {
+    const course = Template.currentData()
+    if (course) {
+      return getAdminRouteToOrg(course.org())
+    }
+  },
+
 
   levelSelectValues() {
     const course = Template.currentData()
@@ -36,6 +45,6 @@ Template.slots.events({
     }, function(){
       Meteor.call("removeSlot", slotId)
     });
-  },
+  }
 
 })

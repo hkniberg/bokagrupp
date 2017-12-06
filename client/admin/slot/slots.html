@@ -2,9 +2,9 @@
   Date context should be a course
 -->
 <template name="slots">
-    <h1>Grupper för <a href="/admin/course/{{shortName}}">{{name}}</a></h1>
+    <h1>Grupper för <a href="{{orgPath}}/course/{{shortName}}">{{name}}</a></h1>
 
-    <a href="/admin/course/{{shortName}}">Tillbaks till kursöversikten</a>
+    <a href="{{orgPath}}/course/{{shortName}}">Tillbaks till kursöversikten</a>
 
     {{#if slots.count}}
         <table class="data-table">
@@ -23,7 +23,7 @@
                     {{> inPlace collection=Slots field="time" doc=this}}
                     {{> inPlace collection=Slots field="limit" doc=this}}
                     <td>
-                        <a href="/admin/course/{{../shortName}}">{{bookingCount}}</a>
+                        <a href="{{orgPath}}/course/{{../shortName}}">{{bookingCount}}</a>
                         {{#unless bookingCount}}
                             <button style="margin-left: 5px;" data-slotid="{{_id}}" class="btn btn-xs btn-danger removeSlotButton">Radera grupp</button>
                         {{/unless}}
@@ -38,7 +38,6 @@
         <h2>Skapa ny grupp</h2>
 
         {{#autoForm collection=Slots id="addSlotForm" type="method" meteormethod="addSlot"}}
-            {{> afQuickField name='courseId' type='hidden' value=_id}}
             {{> afQuickField name='levelId' options=levelSelectValues }}
             {{> afQuickField name='datePeriod'}}
             {{> afQuickField name='time'}}

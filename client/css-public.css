@@ -5,7 +5,7 @@
 
 .pitch p {
     background-color: white;
-    opacity: 0.95;
+    opacity: 0.9;
     border-radius: 10px;
     font-size: 20px;
 }
@@ -16,7 +16,6 @@
 
 body {
     background-image: url('images/background.jpg');
-    background-repeat: no-repeat;
     background-size: 1600px;
     background-repeat: repeat;
 }
@@ -56,7 +55,7 @@ body {
     width: 190px;
     height: 80px;
     padding: 5px;
-    font-family: Tahoma, Arial;
+    font-family: Tahoma, Arial, serif;
     font-size: 12px;
     line-height: normal;
     margin-right: 5px;
@@ -96,7 +95,6 @@ body {
 
 
 .snow{
-    background: none;
     background-image: url('http://www.wearewebstars.dk/codepen/img/s1.png'), url('http://www.wearewebstars.dk/codepen/img//s2.png'), url('http://www.wearewebstars.dk/codepen/img//s3.png');
     height: 100%;
     left: 0;
@@ -110,22 +108,22 @@ body {
     animation: snow 10s linear infinite;
 }
 @keyframes snow {
-    0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+    0% {background-position: 0 0, 0 0, 0 0;}
     50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
     100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
 }
 @-moz-keyframes snow {
-    0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+    0% {background-position: 0 0, 0 0, 0 0;}
     50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
     100% {background-position: 400px 1000px, 200px 400px, 100px 300px;}
 }
 @-webkit-keyframes snow {
-    0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+    0% {background-position: 0 0, 0 0, 0 0;}
     50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
     100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
 }
 @-ms-keyframes snow {
-    0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+    0% {background-position: 0 0, 0 0, 0 0;}
     50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
     100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
 }

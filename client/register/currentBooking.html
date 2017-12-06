@@ -1,0 +1,16 @@
+<template name="currentBooking">
+    {{#if currentSlot}}
+        <div class="slot">
+            <div class="level-name">
+                {{currentSlot.levelName}}
+            </div>
+            <div class="slot-time">
+                {{currentSlot.time}}
+            </div>
+            <div class="slot-date-period">
+                {{currentSlot.datePeriod}}
+            </div>
+        </div>
+    {{/if}}
+
+</template>

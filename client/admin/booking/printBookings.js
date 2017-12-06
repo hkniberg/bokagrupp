@@ -1,4 +1,4 @@
-import {Slots, Courses} from "../../../lib/collection"
+import {Courses} from "../../../lib/collection"
 import {getBookingsForSlot} from "../../../lib/methods/bookingMethods";
 import {getSlotsForCourseAndDatePeriod} from "../../../lib/methods/slotMethods";
 Template.printBookings.helpers({
@@ -6,15 +6,13 @@ Template.printBookings.helpers({
     const data = Template.currentData()
     const course = getCourse()
     if (course) {
-      const slots = getSlotsForCourseAndDatePeriod(course._id, data.datePeriod)
-      return slots
+      return getSlotsForCourseAndDatePeriod(course._id, data.datePeriod)
     }
   },
 
   bookings() {
     const slot = Template.currentData()
-    const bookings = getBookingsForSlot(slot._id)
-    return bookings
+    return getBookingsForSlot(slot._id)
   }
 })
 

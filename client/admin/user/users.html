@@ -1,0 +1,41 @@
+<!--
+    Data context is an org, or null if we are handling superusers.
+-->
+<template name="users">
+    <h1>Användare</h1>
+
+    {{#unless users.count}}
+        <p class="alert alert-warning">Föreslår att du lägger upp en administratör till den organisation!</p>
+    {{/unless}}
+
+    {{#if addingUser}}
+        <div class="well">
+            <h2>Lägg till användare</h2>
+
+            {{#autoForm schema=userSchema id="addUserForm" type="method" meteormethod="addUser" }}
+                {{> afQuickField name='orgId' type="hidden" value=_id}}
+                {{> afQuickField name='role' type="hidden" value="orgAdmin"}}
+                {{> afQuickField name='email'}}
+                {{> afQuickField name='password'}}
+                <button type="submit" class="btn btn-primary">Spara</button>
+                <button class="btn btn-default cancelButton">Avbryt</button>
+            {{/autoForm}}
+        </div>
+    {{else}}
+        {{#if users.count}}
+            <p>Följande användare kan lägga upp kurser och hantera anmälningar på {{name}}: </p>
+            <ul>
+                {{#each users}}
+                    <li>
+                        {{emails.[0].address}}
+                        <button class="btn btn-xs btn-danger removeUserButton" data-userid={{_id}}>X</button>
+                    </li>
+                {{/each}}
+            </ul>
+        {{/if}}
+        <div><button class="btn btn-success createUserButton">Lägg till användare</button></div>
+    {{/if}}
+
+
+
+</template>

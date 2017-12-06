@@ -33,21 +33,21 @@
                     Publik anmälningssida: <a href="{{courseRegistrationUrl}}">{{courseRegistrationUrl}}</a>
                 </li>
                 {{#if slots.count}}
-                    <li><a href="/admin/addBooking/{{shortName}}">Lägg upp ny anmälan manuellt</a></li>
+                    <li><a href="{{coursePath}}/addBooking">Lägg upp ny anmälan manuellt</a></li>
                 {{/if}}
 
-                <li><a href="/admin/editCourse/{{shortName}}">Redigera kurs</a></li>
+                <li><a href="{{orgPath}}/editCourse/{{shortName}}">Redigera kurs</a></li>
                 {{#if levels.count}}
-                    <li><a href="/admin/course/{{shortName}}/levels">Redigera nivåer</a></li>
+                    <li><a href="{{coursePath}}/levels">Redigera nivåer</a></li>
                 {{/if}}
 
                 {{#if slots.count}}
-                    <li><a href="/admin/course/{{shortName}}/slots">Redigera grupper</a></li>
+                    <li><a href="{{coursePath}}/slots">Redigera grupper</a></li>
                 {{/if}}
 
                 {{#if slots.count}}
-                    <li><a href="/admin/unpaidBookings/{{shortName}}">Betalstatus</a></li>
-                    <li><a href="/admin/export/{{shortName}}" target="export">Exportera till Excel</a></li>
+                    <li><a href="{{coursePath}}/unpaidBookings">Obetalade anmälningar</a></li>
+                    <li><a href="{{coursePath}}/export" target="export">Exportera till Excel</a></li>
                     <li>
                         Skriv ut deltagarlista för: {{> datePeriodSelect}}
                         {{#if selectedDatePeriod}}
@@ -97,13 +97,13 @@
         {{else}}
             <p class="alert alert-warning">
                 Grattis, din kurs har nivåer!<br>
-                Nästa grej är att <a href="/admin/course/{{shortName}}/slots">lägga upp några grupper.</a>.
+                Nästa grej är att <a href="{{coursePath}}/slots">lägga upp några grupper.</a>.
             </p>
         {{/if}}
     {{else}}
         <p class="alert alert-warning">
             Grattis, din kurs är skapad!<br>
-            Nu vore det kanon om du kunde <a href="/admin/course/{{shortName}}/levels">lägga upp några nivåer</a>.
+            Nu vore det kanon om du kunde <a href="{{coursePath}}/levels">lägga upp några nivåer</a>.
         </p>
     {{/if}}
 

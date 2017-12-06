@@ -1,7 +1,7 @@
 <template name="levels">
-    <h1>Nivåer för <a href="/admin/course/{{shortName}}">{{name}}</a></h1>
+    <h1>Nivåer för <a href="{{orgPath}}/course/{{shortName}}">{{name}}</a></h1>
 
-    <a href="/admin/course/{{shortName}}">Tillbaks till kursöversikten</a>
+    <a href="{{orgPath}}/course/{{shortName}}">Tillbaks till kursöversikten</a>
 
     {{#if levels.count}}
         <table class="data-table">
@@ -24,7 +24,7 @@
                     {{> inPlace collection=Levels field="minAge" doc=this}}
                     {{> inPlace collection=Levels field="maxAge" doc=this}}
                     <td>
-                        <a href="/admin/course/{{../shortName}}">{{bookingCount}}</a>
+                        <a href="{{orgPath}}/course/{{../shortName}}">{{bookingCount}}</a>
                         {{#unless bookingCount}}
                             <button style="margin-left: 5px;" data-levelid="{{_id}}" class="btn btn-xs btn-danger removeLevelButton">Radera nivå</button>
                         {{/unless}}

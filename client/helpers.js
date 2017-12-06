@@ -1,6 +1,14 @@
 import {isAdmin} from "../lib/roles"
-import {Courses, Levels, Slots, Bookings} from "../lib/collection"
+import {Orgs, Courses, Levels, Slots, Bookings} from "../lib/collection"
 import {formatDate} from "../lib/util"
+import {isSuperUser} from "../lib/roles";
+import {getUserSchema} from "../lib/schemas/userSchema";
+import {getCurrentBooking} from "./bookingSession";
+import {getCurrentCourse} from "./bookingSession";
+import {getCurrentSlot} from "./bookingSession";
+import {getAdminRouteToOrg} from "../lib/router";
+import {getAdminRouteToCourse} from "../lib/router";
+import {getOrgWithShortName} from "../lib/methods/orgMethods";
 
 /**
  * Sets an error to be shown by the errorMessage template.
@@ -49,8 +57,25 @@ Template.registerHelper('userEmail', function (userId) {
 })
 
 Template.registerHelper('isAdmin', function() {
-  return Meteor.userId() && isAdmin(Meteor.userId())
+  if (!Meteor.userId()) {
+    return false
+  } else {
+    return isAdmin(Meteor.userId(), getCurrentOrgId())
+  }
 })
+
+Template.registerHelper('isSuperUser', function() {
+  return Meteor.userId() && isSuperUser(Meteor.userId())
+})
+
+Template.registerHelper('currentOrg', function() {
+  return getCurrentOrg()
+})
+
+Template.registerHelper('Orgs', function() {
+  return Orgs
+})
+
 
 Template.registerHelper('Courses', function() {
   return Courses
@@ -65,19 +90,80 @@ Template.registerHelper('Bookings', function() {
   return Bookings
 })
 
+Template.registerHelper('currentBooking', function() {
+  return getCurrentBooking()
+})
+Template.registerHelper('currentCourse', function() {
+  return getCurrentCourse()
+})
+Template.registerHelper('currentSlot', function() {
+  return getCurrentSlot()
+})
+
 Template.registerHelper('formatDate', function (date) {
   return formatDate(date)
 })
 
-Template.registerHelper('courseRegistrationUrl', () => {
-  const course = Template.currentData()
-  return getUrlRelativeToCurrent("/courses/" + course.shortName)
+Template.registerHelper('currentOrg', function() {
+  return getCurrentOrg()
+})
+
+Template.registerHelper('orgPath', function (org) {
+  if (!org) {
+    org = getCurrentOrg()
+  }
+  if (org) {
+    return getAdminRouteToOrg(org)
+  }
+})
+
+
+Template.registerHelper('coursePath', function (course) {
+  if (course) {
+    return getAdminRouteToCourse(course)
+  }
+})
+
+Template.registerHelper('courseRegistrationUrl', function (course) {
+  if (course) {
+    return getUrlRelativeToCurrent(course.registrationPath())
+  }
+})
+
+Template.registerHelper('userSchema', () => {
+  return getUserSchema()
 })
 
 export function getUrlRelativeToCurrent(path) {
-  const href = window.location.href //TODO
+  const href = window.location.href
   const pathname = window.location.pathname
   const base = href.substring(0, href.length - pathname.length)
   return base + path
+}
+
+export function setCurrentOrgId(orgId) {
+  Session.set("currentOrgId", orgId)
+}
+
+export function getCurrentOrgId() {
+  const org = getCurrentOrg()
+  if (org) {
+    return org._id
+  } else {
+    return null
+  }
+}
+
+export function getCurrentOrg() {
+  const route = Router.current()
+  if (!route) {
+    console.log("Strange, no route")
+    return null
+  }
+  const orgShortName = route.params.orgShortName
+  if (!orgShortName) {
+    return null
+  }
+  return getOrgWithShortName(orgShortName, false)
 }
 

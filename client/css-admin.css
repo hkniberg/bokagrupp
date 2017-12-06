@@ -1,5 +1,6 @@
 .whiteBackground {
     background-color: white;
+    padding: 5px;
 }
 
 .adminPage h1 {
@@ -69,7 +70,7 @@
 }
 
 .payment_status_button_table {
-    margin: 0px 0px 0px 0px;
+    margin: 0 0 0 0;
 }
 
 .payment_status_true {
@@ -81,13 +82,13 @@
 }
 
 .payment_status_button {
-    margin: 0px 0px 0px 0px;
+    margin: 0 0 0 0;
 }
 
 .help {
     font-style: italic;
     color: #666666;
-    margin: 5px 0px 10px 5px;
+    margin: 5px 0 10px 5px;
     width: 500px;
 }
 

@@ -1,6 +1,9 @@
 import {getLevelsForCourse} from "../../lib/methods/levelMethods";
 import {getSlotsForLevel} from "../../lib/methods/slotMethods";
 import {getSlotsForCourse} from "../../lib/methods/slotMethods";
+import {getPublicRouteToCourse} from "../../lib/router";
+import {startNewBooking} from "../bookingSession";
+import {getCurrentCourse} from "../bookingSession";
 
 Template.selectSlot.helpers({
   course() {
@@ -26,7 +29,8 @@ Template.selectSlot.helpers({
 Template.selectSlot.events({
   "click .selectSlotButton"(event) {
     const slotId = $(event.target).data("slotid")
-    Session.set("selectedSlotId", slotId)
-    Router.go("/enterMembershipNumber")
+    startNewBooking(slotId)
+    const course = getCurrentCourse()
+    Router.go(getPublicRouteToCourse(course) + "/enterMembershipNumber")
   }
 })

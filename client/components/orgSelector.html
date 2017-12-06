@@ -1,0 +1,16 @@
+<template name="orgSelector">
+    {{#if isSuperUser}}
+        <select class="orgSelect">
+            <option value="" {{superAdminSelected}}>Superadmin</option>
+            {{#each orgs}}
+                <option value="{{_id}}" {{orgSelected}}>{{name}}</option>
+            {{/each}}
+        </select>
+    {{else}}
+        {{#if currentOrg}}
+            {{currentOrg.name}}
+        {{else}}
+            Admin
+        {{/if}}
+    {{/if}}
+</template>

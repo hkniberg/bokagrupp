@@ -1,7 +1,7 @@
 <template name="unpaidBookingsForCourse">
-    <h1>Obetalda anmälningar till <a href="/admin/course/{{shortName}}">{{name}}</a></h1>
+    <h1>Obetalda anmälningar till <a href="{{coursePath this}}">{{name}}</a></h1>
 
-    <a href="/admin/course/{{shortName}}">Tillbaks till kursöversikten</a>
+    <a href="{{coursePath this}}">Tillbaks till kursöversikten</a>
 
     <p>Det finns totalt <b>{{bookingCount}}</b> anmälningar, varav <b>{{paidCount}}</b> betalda och <b>{{unpaidCount}}</b> obetalda</p>
 

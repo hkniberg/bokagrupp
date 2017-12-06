@@ -5,6 +5,8 @@
 
     {{#if courses.count}}
         {{> reactiveTable settings=tableSettings class="table table-striped table-bordered table-condensed"}}
+    {{else}}
+        <div class="alert alert-warning">Du har inga kurser ännu. Lite tråkigt. Vad sägs om att skapa en?</div>
     {{/if}}
 
 </template>

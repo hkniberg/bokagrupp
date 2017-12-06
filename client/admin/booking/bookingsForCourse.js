@@ -1,4 +1,5 @@
 import {getBooking} from "../../../lib/methods/bookingMethods";
+import {getAdminRouteToCourse} from "../../../lib/router";
 Template.bookingsForCourse.events({
   "click .removeBookingButton"(event) {
     const bookingId = $(event.target).data("bookingid")
@@ -18,7 +19,7 @@ Template.bookingsForCourse.events({
   "click .changeSlotButton"(event) {
     const bookingId = $(event.target).data("bookingid")
     const booking = getBooking(bookingId)
-    Router.go("/admin/changeSlot/" + bookingId)
+    Router.go(getAdminRouteToCourse(booking.course()) + "/changeSlot/" + bookingId)
 
   }
 })

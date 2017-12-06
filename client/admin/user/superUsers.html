@@ -1,0 +1,39 @@
+<template name="superUsers">
+    <h1>Superanvändare</h1>
+
+    {{#unless users.count}}
+        <p class="alert alert-danger">Finns inga superanvändare! Hur kom du ens hit?</p>
+    {{/unless}}
+
+    {{#if addingUser}}
+        <div class="well">
+            <h2>Lägg till användare</h2>
+
+            {{#autoForm schema=userSchema id="addSuperUserForm" type="method" meteormethod="addUser" }}
+                {{> afQuickField name='role' type="hidden" value="superUser"}}
+                {{> afQuickField name='email'}}
+                {{> afQuickField name='password'}}
+                <button type="submit" class="btn btn-primary">Spara</button>
+                <button class="btn btn-default cancelButton">Avbryt</button>
+            {{/autoForm}}
+        </div>
+    {{else}}
+        {{#if users.count}}
+            <p>Följande användare kan lägga upp organisationer och göra typ allt: </p>
+            <ul>
+                {{#each users}}
+                    <li>
+                        {{emails.[0].address}}
+                        {{#unless userIsMe}}
+                            <button class="btn btn-xs btn-danger removeUserButton" data-userid={{_id}}>X</button>
+                        {{/unless}}
+                    </li>
+                {{/each}}
+            </ul>
+        {{/if}}
+        <div><button class="btn btn-success createUserButton">Lägg till superanvändare</button></div>
+    {{/if}}
+
+
+
+</template>
