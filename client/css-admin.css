@@ -111,3 +111,8 @@
 .badge-warning {
     background-color: #ffb37a;
 }
+
+.logo {
+    max-height: 250px;
+}
+
