@@ -1,4 +1,5 @@
 import {getUnpaidBookingsForCourse} from "../../../lib/methods/bookingMethods";
+import {formatDate} from "../../../lib/dateUtil"
 
 Template.unpaidBookingsForCourse.helpers({
   unpaidBookings() {
@@ -16,7 +17,9 @@ Template.unpaidBookingsForCourse.helpers({
         {key: "childFirstName", label: "Förnamn"},
         {key: "childLastName", label: "Efternamn"},
         {key: "childMembershipNumber", label: "Medlemsnummer"},
-        {key: "childPersonNumber", label: "Personnummer"},
+        {key: "childBirthDate", label: "Födelsedatum", fn: function(birthDate) {
+          return formatDate(birthDate)
+        }},
         {key: "parentEmail", label: "Epost"},
         {key: "parentPhone", label: "Telefon"},
         {key: "comment", label: "Kommentar"}

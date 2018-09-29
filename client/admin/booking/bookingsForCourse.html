@@ -16,7 +16,7 @@
                                 <th>Förnamn</th>
                                 <th>Efternamn</th>
                                 <th>Betalat?</th>
-                                <th>Personnummer</th>
+                                <th>Födelsedatum</th>
                                 <th>Postnr</th>
                                 <th>Medlemsnr</th>
                                 <th>Epost</th>
@@ -31,7 +31,7 @@
                                     {{> inPlace collection=Bookings field="childLastName" doc=this}}
 
                                     <td>{{> paymentStatusButtons}}</td>
-                                    {{> inPlace collection=Bookings field="childPersonNumber" doc=this}}
+                                    <td>{{formatDate childBirthDate}}</td>
                                     {{> inPlace collection=Bookings field="childZip" doc=this}}
                                     {{> inPlace collection=Bookings field="childMembershipNumber" doc=this}}
                                     {{> inPlace collection=Bookings field="parentEmail" doc=this}}

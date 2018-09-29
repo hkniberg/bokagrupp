@@ -4,13 +4,14 @@ Context should be something like:
   collection: ...
   doc: ...
   fieldName: ...
+  type: ...
 }
 -->
 <template name="inPlace">
     {{#if editing}}
         <td>
         {{#autoForm schema=schema id=formId doc=doc type="method-update" meteormethod=methodName autosave=true}}
-            {{> afFieldInput name=field}}
+            {{> afFieldInput name=field type=type}}
             {{#if afFieldIsInvalid name=field}}
                 <span class="text-danger">{{afFieldMessage name=field}}</span>
             {{/if}}
@@ -18,7 +19,11 @@ Context should be something like:
         </td>
     {{else}}
         <td class="inPlaceField">
-            {{fieldValue}}
+            {{#if isDate}}
+                {{formatDate fieldValue}}
+            {{else}}
+                {{fieldValue}}
+            {{/if}}
         </td>
     {{/if}}
 

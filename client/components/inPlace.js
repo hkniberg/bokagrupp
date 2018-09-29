@@ -8,7 +8,7 @@ let counter = 0
 
 Template.inPlace.onRendered(function() {
   const data = Template.currentData()
-
+  
   AutoForm.addHooks(['InPlaceForm for ' + data.doc._id], {
     onSuccess: function(formType, newId) {
       Session.set("inPlaceEditing", null)
@@ -18,6 +18,11 @@ Template.inPlace.onRendered(function() {
 })
 
 Template.inPlace.helpers({
+
+  isDate() {
+    return Template.currentData().type == "date"
+  },
+
   schema() {
     const data = Template.currentData()
     const collection = data.collection
