@@ -1,4 +1,4 @@
-import {Orgs, Courses, Levels, Slots, Bookings} from "../lib/collection"
+import {Orgs, Courses, Levels, Slots, Bookings, Attendance} from "../lib/collection"
 import {Uploads} from "../lib/uploads"
 import {assertAdmin} from "../lib/roles";
 import {getSlotsForCourseAndDatePeriod} from "../lib/methods/slotMethods";
@@ -10,6 +10,7 @@ import {getCourseWithOrgAndShortName} from "../lib/methods/courseMethods";
 import {getUsersForOrg} from "../lib/methods/userMethods";
 import {assertSuperUser} from "../lib/roles";
 import {getSuperUsers} from "../lib/methods/userMethods";
+import {getCourseWithAttendanceKey} from "../lib/methods/courseMethods";
 
 Meteor.publish('users', function() {
   assertSuperUser(this.userId)
@@ -35,6 +36,18 @@ Meteor.publish('superUsers', function(orgShortName) {
 Meteor.publish('user', function(email) {
   assertSuperUser(this.userId)
   return Meteor.users.find({"emails.0.address": email})
+})
+
+Meteor.publish('attendance', function(attendanceKey) {
+  const course = getCourseWithAttendanceKey(attendanceKey)
+  const courseId = course._id
+  return [
+    Courses.find({_id: courseId}),
+    Levels.find({courseId: course._id}),
+    Slots.find({courseId: course._id}),
+    Bookings.find({courseId: course._id}),
+    Attendance.find({courseId: course._id})
+  ]
 })
 
 Meteor.publish('allCourseNames', function() {

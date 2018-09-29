@@ -1,0 +1,33 @@
+<!--
+    Data context should be attendanceKey
+-->
+<template name="editAttendance">
+    <h1>Närvarolista</h1>
+    <div>{{course.name}}</div>
+
+    <div>
+        <b>Datum:</b><input type="date" class="selectedDate" value="{{selectedDate}}">
+    </div>
+    <div>
+        <b>Grupp:</b>
+        <select class="slotSelect">
+            <option value="">(Välj grupp)</option>
+            {{#each course.slots}}
+                <option {{slotSelected}} value="{{_id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+
+    {{#if selectedSlot}}
+        <div class="well well-sm margin-top">
+            {{#each selectedSlot.bookings}}
+                <div class="attendancePanel">
+                    <input type="checkbox" class="attendanceCheckbox" {{checked}} data-bookingid="{{_id}}">
+                    {{childFullName}}
+                </div>
+            {{/each}}
+        </div>
+    {{/if}}
+
+</template>

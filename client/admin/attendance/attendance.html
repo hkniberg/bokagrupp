@@ -1,0 +1,12 @@
+<template name="attendance">
+    <h1>Närvarolista för <a href="{{coursePath this}}">{{name}}</a></h1>
+
+    <a href="{{coursePath this}}">Tillbaks till kursöversikten</a>
+
+    <h3>Avprickningslänk för lärare</h3>
+    <p>Skicka denna länk till lärare. Där kan de pricka av närvaro.</p>
+    <div class="well well-sm">
+        <a href="{{attendanceLink}}">{{attendanceLink}}</a>
+    </div>
+
+</template>

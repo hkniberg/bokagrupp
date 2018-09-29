@@ -1,5 +1,6 @@
-import {Bookings} from "../lib/collection"
-import {PersonNumber} from "../lib/personNumber" 
+import {Bookings, Courses} from "../lib/collection"
+import {PersonNumber} from "../lib/personNumber"
+import {generateRandomId} from "../lib/util";
 
 Migrations.add({
   version: 1,
@@ -36,5 +37,19 @@ Migrations.add({
     console.log("migrated to v1")
   }
 })
+
+Migrations.add({
+  version: 3,
+  up() {
+    const courses = Courses.find()
+    courses.forEach((course) => {
+      if (!course.attendanceKey) {
+        Courses.update({_id: course._id}, {$set: {attendanceKey: generateRandomId(8)}})
+      }
+    })
+  }
+})
+
+
 
 

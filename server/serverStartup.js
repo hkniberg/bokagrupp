@@ -9,8 +9,9 @@ if (process.env.MAIL_URL) {
 
 
 Meteor.startup(() => {
+  Migrations.migrateTo('latest')
   attachSchemas()
   initDb()
-  Migrations.migrateTo('latest')
 });
+
 
