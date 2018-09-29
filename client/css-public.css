@@ -29,10 +29,10 @@ body {
     opacity: 0.95;
 }
 
+
 .level {
-    width: 250px;
-    margin-right: 10px;
 }
+
 
 .level > .level-name {
     font-size: 22px;
@@ -47,28 +47,37 @@ body {
     margin-bottom: 20px;
 }
 
-
+.slots {
+}
 
 .slot {
-    position: relative;
+    vertical-align: top;
+    display: inline-block;
     border: 1px solid black;
-    width: 190px;
-    height: 80px;
+
+    min-width: 170px;
+    height: 100px;
     padding: 5px;
     font-family: Tahoma, Arial, serif;
     font-size: 12px;
-    line-height: normal;
+
     margin-right: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background: #e6e6e6;
 
     -moz-box-shadow: 5px 5px 5px #888;
     -webkit-box-shadow: 5px 5px 5px #888;
     box-shadow: 5px 5px 5px #888;
+
 }
 
-.slot > .level-name {
-    font-size: 16px;
+.slot .level-name {
+
+    font-weight: bold;
+}
+
+.slotAvailability {
+    display: inline-block;
 }
 
 .slot-full {
@@ -87,10 +96,13 @@ body {
 
 }
 
-.slot-book-button {
-    position: absolute;
-    top: 55px;
-    left: 140px;
+.membershipNumberForm {
+    max-width: 200px;
+}
+
+.linkToCourseHomePage {
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 

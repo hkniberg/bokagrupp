@@ -1,21 +1,27 @@
 <template name="enterMembershipNumber">
     <h1>Ange barnets medlemsnummer</h1>
 
-    <div class="col col-xs-6">
-        <p>
-            För att kunna gå i denna grupp behöver ditt barn vara medlem i Friluftsfrämjandet.
-        </p>
+    <div class="row">
+        <div class="col col-sm-6">
+            <p>
+                För att kunna gå i denna grupp behöver ditt barn vara medlem i Friluftsfrämjandet.
+            </p>
 
-        {{> quickForm schema=membershipNumberSchema id="membershipNumberForm" buttonContent="OK"}}
+            <div class="membershipNumberForm">
+                {{> quickForm schema=membershipNumberSchema id="membershipNumberForm" buttonContent="OK"}}
+            </div>
 
-        <p>Inte medlem ännu? <a href="http://www.friluftsframjandet.se/bli_medlem">Ansök här</a></p>
+            <p>Inte medlem ännu? <a href="http://www.friluftsframjandet.se/bli_medlem" target="blimedlem">Ansök här</a></p>
 
-        {{> linkToCourseHomePage currentCourse}}
-    </div>
+            <div class="linkToCourseHomePage">
+                {{> linkToCourseHomePage currentCourse}}
+            </div>
+        </div>
 
 
-    <div class="col col-xs-6">
-        {{> currentBooking}}
+        <div class="col col-sm-6">
+            {{> currentBooking}}
+        </div>
     </div>
 
 

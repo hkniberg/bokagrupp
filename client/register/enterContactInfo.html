@@ -1,34 +1,42 @@
 <template name="enterContactInfo">
     <h1>Ange kontaktinformation</h1>
 
-    <div class="col col-xs-6">
-        <p>
-            Medlemsnummer: {{currentBooking.membershipNumber}}
-        </p>
+    <div class="row">
 
-        {{#autoForm collection=Bookings id="enterContactInfoForm" type="method" meteormethod="addBookingAndSendEmail"}}
-            {{> afQuickField name='slotId' type='hidden' value=currentSlot._id}}
-            {{> afQuickField name='childMembershipNumber' type='hidden' value=currentBooking.membershipNumber}}
+        <div class="col col-sm-6">
+            <p>
+                Medlemsnummer: {{currentBooking.membershipNumber}}
+            </p>
 
-            {{> afQuickField name='childFirstName'}}
-            {{> afQuickField name='childLastName'}}
-            {{> afQuickField name='childPersonNumber' placeholder="ååååmmdd-xxxx"}}
-            {{> afQuickField name='childZip'}}
-            {{> afQuickField name='parentEmail'}}
-            {{> afQuickField name='parentPhone'}}
+            {{#autoForm collection=Bookings id="enterContactInfoForm" type="method" meteormethod="addBookingAndSendEmail"}}
+                {{> afQuickField name='slotId' type='hidden' value=currentSlot._id}}
+                {{> afQuickField name='childMembershipNumber' type='hidden' value=currentBooking.membershipNumber}}
 
-            <button type="submit" class="btn btn-primary">Anmäl</button>
-        {{/autoForm}}
+                {{> afQuickField name='childFirstName'}}
+                {{> afQuickField name='childLastName'}}
+                {{> afQuickField name='childPersonNumber' placeholder="ååååmmdd-xxxx"}}
+                <div class="help">
+                    Personnummer används för säkerställa att åldern stämmer med kursnivån.
+                </div>
+                {{> afQuickField name='childZip'}}
+                {{> afQuickField name='parentEmail'}}
+                {{> afQuickField name='parentPhone'}}
+                <div class="help">
+                    Epost och mobil används endast för information relaterat till den här kursen. Inget spam!
+                </div>
+                <button type="submit" class="btn btn-primary">Anmäl</button>
+            {{/autoForm}}
 
-        <div>
-            {{> linkToCourseHomePage currentCourse}}
+            <div class="linkToCourseHomePage">
+                {{> linkToCourseHomePage currentCourse}}
+            </div>
+
         </div>
 
-    </div>
 
-
-    <div class="col col-xs-6">
-        {{> currentBooking}}
+        <div class="col col-sm-6">
+            {{> currentBooking}}
+        </div>
     </div>
 
 </template>

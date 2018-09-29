@@ -23,25 +23,27 @@
                 <h1>Välj en grupp</h1>
             {{/if}}
 
-            <table>
-                {{#each levels}}
-                    <tr valign="top">
-                        <td>
-                            <div class="level">
-                                <div class="level-name">
-                                    {{name}}
-                                </div>
-                                <div class="level-prerequisite">
-                                    Förkunskapskrav: {{prerequisiteDescription}}
-                                </div>
-                                <div class="level-description">
-                                    {{description}}
-                                </div>
-                            </div>
-                        </td>
+            {{#each levels}}
+                <hr>
+                <div class="row">
 
-                        {{#each slots}}
-                            <td>
+                    <div class="col-sm-6">
+                        <div class="level">
+                            <div class="level-name">
+                                {{name}}
+                            </div>
+                            <div class="level-prerequisite">
+                                Förkunskapskrav: {{prerequisiteDescription}}
+                            </div>
+                            <div class="level-description">
+                                {{description}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="slots">
+
+                            {{#each slots}}
                                 <div class="slot">
                                     {{#if isBookable}}
                                         <div class="slot-available">
@@ -54,9 +56,9 @@
                                             <div class="slot-date-period">
                                                 {{datePeriod}}
                                             </div>
-                                            {{> slotAvailability}}
-                                            <div class="slot-book-button">
-                                                <button class="selectSlotButton" data-slotid="{{_id}}">Boka</button>
+                                            <div>
+                                                <button class="btn btn-success btn-sm selectSlotButton" data-slotid="{{_id}}">Boka</button>
+                                                {{> slotAvailability}}
                                             </div>
                                         </div>
                                     {{else}}
@@ -78,16 +80,14 @@
                                         </div>
                                     {{/if}}
                                 </div>
-                            </td>
 
+                            {{/each}}
+                        </div>
 
-                        {{/each}}
+                    </div>
 
-
-                    </tr>
-                {{/each}}
-
-            </table>
+                </div>
+            {{/each}}
 
         {{/unless}}
 
