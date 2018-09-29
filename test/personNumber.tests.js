@@ -1,7 +1,7 @@
 
-const util = require('../lib/util.js')
+const dateUtil = require('../lib/dateUtil.js')
 const expect = require('chai').expect
-const PersonNumber = require("../lib/personNumber").PersonNumber
+const PersonNumber = require("../lib/personNumber").PersonNumber
 
 describe('PersonNumber', function() {
   it('create', function() {
@@ -30,6 +30,10 @@ describe('PersonNumber', function() {
   it('long valid personnumber without dash', function() {
     const pn = new PersonNumber("197302170019")
     expect(pn.valid).to.equal(true)
+  })
+  it('birthDate', function() {
+    const pn = new PersonNumber("730217-0019")
+    expect(pn.getBirthDate().toISOString()).to.equal("1973-02-17T00:00:00.000Z")
   })
   it('whitespace', function() {
     const pn = new PersonNumber("   730217-0019   ")

@@ -8,5 +8,9 @@ if (process.env.MAIL_URL) {
 }
 
 
-attachSchemas()
-initDb()
+Meteor.startup(() => {
+  attachSchemas()
+  initDb()
+  Migrations.migrateTo('latest')
+});
+

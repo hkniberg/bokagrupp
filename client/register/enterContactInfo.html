@@ -14,9 +14,14 @@
 
                 {{> afQuickField name='childFirstName'}}
                 {{> afQuickField name='childLastName'}}
-                {{> afQuickField name='childPersonNumber' placeholder="ååååmmdd-xxxx"}}
+                {{> afQuickField name='childGender'}}
                 <div class="help">
-                    Personnummer används för säkerställa att åldern stämmer med kursnivån.
+                    Barnets kön behövs för statistiken.
+                </div>
+
+                {{> afQuickField name='childBirthDate'}}
+                <div class="help">
+                    Födelsedatum används för säkerställa att barnets ålder stämmer med kursnivån.
                 </div>
                 {{> afQuickField name='childZip'}}
                 {{> afQuickField name='parentEmail'}}

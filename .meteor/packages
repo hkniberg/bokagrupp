@@ -45,3 +45,4 @@ check
 email
 ostrio:files
 ostrio:autoform-files
+percolate:migrations

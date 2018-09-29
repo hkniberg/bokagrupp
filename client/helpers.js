@@ -1,6 +1,6 @@
 import {isAdmin} from "../lib/roles"
 import {Orgs, Courses, Levels, Slots, Bookings} from "../lib/collection"
-import {formatDate} from "../lib/util"
+import {formatDate} from "../lib/dateUtil"
 import {isSuperUser} from "../lib/roles";
 import {getUserSchema} from "../lib/schemas/userSchema";
 import {getCurrentBooking} from "./bookingSession";

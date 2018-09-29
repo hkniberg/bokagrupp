@@ -1,11 +1,33 @@
 <template name="bookingComplete">
     <h1>Anmälan klar!</h1>
-    <p>
-        Tack för din anmälan av {{childName}} till
-        gruppen {{level.name}}, {{slot.time}} perioden {{slot.datePeriod}}.
-    </p>
+    <div class="row">
+        <div class="col col-sm-6">
+            <p>
+                Härligt! {{childFirstName}} är nu anmäld och klar!
+            </p>
 
-    {{{course.paymentInstructions}}}
+            <div class="slot">
+                <div class="level-name">
+                    {{level.name}}
+                </div>
+                <div class="slot-time">
+                    {{slot.time}}
+                </div>
+                <div class="slot-date-period">
+                    {{slot.datePeriod}}
+                </div>
+                <div class="booked">
+                    Välkommen!
+                </div>
+            </div>
+
+            {{{course.paymentInstructions}}}
+
+        </div>
+        <div class="col col-sm-6">
+            <img width="300px" src="https://media.giphy.com/media/xUNd9NPgZAtyD9L6rC/giphy.gif">
+        </div>
+    </div>
     <br>
     <p>
         Gör en <a href="{{courseRegistrationUrl course}}">ny bokning</a> <br>
