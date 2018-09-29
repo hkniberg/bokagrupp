@@ -5,13 +5,16 @@ const addingUserVar = new ReactiveVar(false)
 
 
 Template.users.onRendered(function() {
+  addingUserVar.set(false)
+
+
   const org = Template.currentData()
   if (getUsersForOrg(org._id).count() == 0) {
     addingUserVar.set(true)
   }
 
   AutoForm.addHooks(['addUserForm'], {
-    onSuccess: function(formType, result) {
+    onSuccess: function() {
       addingUserVar.set(false)
     }
   })
