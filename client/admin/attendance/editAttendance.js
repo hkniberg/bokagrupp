@@ -79,7 +79,7 @@ Template.editAttendance.events({
 function getSelectedDate() {
   const dateString = selectedDateStringVar.get()
   if (dateString) {
-    return moment(dateString).toDate()
+    return moment.utc(dateString).toDate()
   } else {
     return null
   }
