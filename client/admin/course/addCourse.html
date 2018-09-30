@@ -1,19 +1,41 @@
 <template name="addCourse">
     <h1>Skapa kurs</h1>
 
-    {{#autoForm collection=Courses id="addCourseForm" type="method" meteormethod="addCourse" }}
-        {{> afQuickField name='orgId' type="hidden" value=orgId}}
-        {{> afQuickField name='shortName'}}
-        {{> afQuickField name='name'}}
-        {{> afQuickField name='startDate'}}
-        {{> afQuickField name='homeUrl'}}
-        {{> afQuickField name='logoFile'}}
-        {{> afQuickField name='confirmationEmailSender'}}
-        {{> afQuickField name='confirmationEmailSubject'}}
-        {{> afQuickField name='paymentInstructions'}}
+    <div class="well">
+        <h2>Ny tom kurs</h2>
+        <button class="btn btn-success emptyButton">Skapa ny tom kurs</button>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Skapa kurs</button>
-    {{/autoForm}}
+    <div class="well">
+        <h2>Klona befintlig kurs</h2>
+        <div><b>Vilken kurs vill du klona?</b></div>
+        <div>
+            <select class="courseSelect">
+                <option>(välj)</option>
+                {{#each courses}}
+                    <option value={{_id}}>{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="help">
+            En ny kurs kommer skapas med samma beskrivning, nivåer, och grupper.
+            Sen kan du pilla och redigera.
+        </div>
+        {{#if selectedCourse}}
+            <div>
+                <b>Vad ska kursen ha för kortnamn?</b>
+            </div>
+            <div>
+                <input type="text" class="shortNameField" value="{{selectedCourse.shortName}}">
+            </div>
+            <div class="help">
+                Kortnamnet ingår som del i kursens webbadress, och måste vara unikt.
+            </div>
 
+            {{> errorMessage 'addCourse'}}
+
+            <button class="btn btn-success cloneButton">Klona denna kurs</button>
+        {{/if}}
+    </div>
 
 </template>

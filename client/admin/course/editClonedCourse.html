@@ -1,0 +1,19 @@
+<template name="editClonedCourse">
+    <h1>Redigera klonad kurs</h1>
+
+    <div class="alert alert-success">
+        <b>Detta är en klonad kurs.</b><br>
+        Här kan du byta namn och startdatum och sånt.
+    </div>
+
+    {{> quickForm
+        collection=Courses
+        id="editClonedCourseForm"
+        type="method-update"
+        doc=course
+        meteormethod="updateCourse"
+        omitFields="orgId"
+        buttonContent="Spara kurs"
+    }}
+
+</template>

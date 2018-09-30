@@ -1,0 +1,19 @@
+<template name="addEmptyCourse">
+    <h1>Skapa kurs</h1>
+
+    {{#autoForm collection=Courses id="addCourseForm" type="method" meteormethod="addCourse" }}
+        {{> afQuickField name='orgId' type="hidden" value=orgId}}
+        {{> afQuickField name='shortName'}}
+        {{> afQuickField name='name'}}
+        {{> afQuickField name='startDate'}}
+        {{> afQuickField name='homeUrl'}}
+        {{> afQuickField name='logoFile'}}
+        {{> afQuickField name='confirmationEmailSender'}}
+        {{> afQuickField name='confirmationEmailSubject'}}
+        {{> afQuickField name='paymentInstructions'}}
+
+        <button type="submit" class="btn btn-primary">Skapa kurs</button>
+    {{/autoForm}}
+
+
+</template>

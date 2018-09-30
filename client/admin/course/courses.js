@@ -4,7 +4,7 @@ import {getUrlRelativeToCurrent} from "../../helpers";
 
 Template.courses.helpers({
   courses() {
-    return Courses.find()
+    return Courses.find({}, {sort: {name: 1}})
   },
 
   tableSettings() {
