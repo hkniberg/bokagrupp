@@ -8,12 +8,16 @@
             {{#if levels.count}}
                 {{#if slots.count}}
                     {{#if hasStarted}}
-                        <span class="badge badge-warning">Stängd, kursen har startat</span>
+                        <span class="badge badge-danger">Stängd, kursen har startat</span>
                     {{else}}
                         {{#if isFull}}
-                            <span class="badge badge-warning">Fullbokad</span>
+                            <span class="badge badge-danger">Fullbokad</span>
                         {{else}}
-                            <span class="badge badge-success">Öppen för anmälningar</span>
+                            {{#if bookingOpen}}
+                                <span class="badge badge-success">Öppen för anmälningar</span>
+                            {{else}}
+                                <span class="badge badge-danger">Inte öppen för anmälningar ännu</span>
+                            {{/if}}
                         {{/if}}
                     {{/if}}
                 {{else}}
@@ -24,6 +28,13 @@
             {{/if}}
 
             <ul>
+
+                {{#if bookingOpen}}
+                    <li>Anmälningssidan öppnade <b>{{formatDate bookingOpenDate}}</b></li>
+                {{else}}
+                    <li>Anmälningssidan öppnar <b>{{formatDate bookingOpenDate}}</b></li>
+                {{/if}}
+
                 {{#if hasStarted}}
                     <li>Kursen startade <b>{{formatDate startDate}}</b></li>
                 {{else}}

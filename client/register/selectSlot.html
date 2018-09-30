@@ -3,6 +3,13 @@
         {{> noSuchCourse}}
     {{else}}
 
+        {{#unless bookingOpen}}
+            <h2>Bokningen är inte öppen ännu</h2>
+            <div class="margin-bottom">Bokningen öppnar {{formatDate course.bookingOpenDate}}. Välkommen åter!</div>
+            <img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif">
+        {{/unless}}
+
+
         {{#unless hasSlots}}
             <h1>Kursen inte redo</h1>
             Oj. Kursen har inga grupper ännu, den håller antagligen fortfarande på att läggas upp.
@@ -23,71 +30,73 @@
                 <h1>Välj en grupp</h1>
             {{/if}}
 
-            {{#each levels}}
-                <hr>
-                <div class="row">
+            {{#if bookingOpen}}
+                {{#each levels}}
+                    <hr>
+                    <div class="row">
 
-                    <div class="col-sm-6">
-                        <div class="level">
-                            <div class="level-name">
-                                {{name}}
-                            </div>
-                            <div class="level-prerequisite">
-                                Förkunskapskrav: {{prerequisiteDescription}}
-                            </div>
-                            <div class="level-description">
-                                {{description}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="slots">
-
-                            {{#each slots}}
-                                <div class="slot">
-                                    {{#if isBookable}}
-                                        <div class="slot-available">
-                                            <div class="level-name">
-                                                {{../name}}
-                                            </div>
-                                            <div class="slot-time">
-                                                {{time}}
-                                            </div>
-                                            <div class="slot-date-period">
-                                                {{datePeriod}}
-                                            </div>
-                                            <div class="margin-top">
-                                                <button class="btn btn-success btn-sm selectSlotButton" data-slotid="{{_id}}">Boka</button>
-                                                {{> slotAvailability}}
-                                            </div>
-                                        </div>
-                                    {{else}}
-                                        <div class="slot-full">
-                                            <div class="level-name">
-                                                {{../name}}
-                                            </div>
-                                            <div class="slot-time">
-                                                {{time}}
-                                            </div>
-                                            <div class="slot-date-period">
-                                                {{datePeriod}}
-                                            </div>
-                                            {{#if ../../hasStarted}}
-                                                (Anmälan stängd)
-                                            {{else}}
-                                                {{> slotAvailability}}
-                                            {{/if}}
-                                        </div>
-                                    {{/if}}
+                        <div class="col-sm-6">
+                            <div class="level">
+                                <div class="level-name">
+                                    {{name}}
                                 </div>
+                                <div class="level-prerequisite">
+                                    Förkunskapskrav: {{prerequisiteDescription}}
+                                </div>
+                                <div class="level-description">
+                                    {{description}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="slots">
 
-                            {{/each}}
+                                {{#each slots}}
+                                    <div class="slot">
+                                        {{#if isBookable}}
+                                            <div class="slot-available">
+                                                <div class="level-name">
+                                                    {{../name}}
+                                                </div>
+                                                <div class="slot-time">
+                                                    {{time}}
+                                                </div>
+                                                <div class="slot-date-period">
+                                                    {{datePeriod}}
+                                                </div>
+                                                <div class="margin-top">
+                                                    <button class="btn btn-success btn-sm selectSlotButton" data-slotid="{{_id}}">Boka</button>
+                                                    {{> slotAvailability}}
+                                                </div>
+                                            </div>
+                                        {{else}}
+                                            <div class="slot-full">
+                                                <div class="level-name">
+                                                    {{../name}}
+                                                </div>
+                                                <div class="slot-time">
+                                                    {{time}}
+                                                </div>
+                                                <div class="slot-date-period">
+                                                    {{datePeriod}}
+                                                </div>
+                                                {{#if ../../hasStarted}}
+                                                    (Anmälan stängd)
+                                                {{else}}
+                                                    {{> slotAvailability}}
+                                                {{/if}}
+                                            </div>
+                                        {{/if}}
+                                    </div>
+
+                                {{/each}}
+                            </div>
+
                         </div>
 
                     </div>
-
-                </div>
-            {{/each}}
+                {{/each}}
+            {{/if}}
 
         {{/unless}}
 
