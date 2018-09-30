@@ -29,10 +29,12 @@
 
             <ul>
 
-                {{#if bookingOpen}}
-                    <li>Anmälningssidan öppnade <b>{{formatDate bookingOpenDate}}</b></li>
-                {{else}}
-                    <li>Anmälningssidan öppnar <b>{{formatDate bookingOpenDate}}</b></li>
+                {{#if bookingOpenDate}}
+                    {{#if bookingOpen}}
+                        <li>Anmälningssidan öppnade <b>{{formatDate bookingOpenDate}}</b></li>
+                    {{else}}
+                        <li>Anmälningssidan öppnar <b>{{formatDate bookingOpenDate}}</b></li>
+                    {{/if}}
                 {{/if}}
 
                 {{#if hasStarted}}
