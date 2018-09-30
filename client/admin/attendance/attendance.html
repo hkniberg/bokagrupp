@@ -3,10 +3,53 @@
 
     <a href="{{coursePath this}}">Tillbaks till kursöversikten</a>
 
-    <h3>Avprickningslänk för lärare</h3>
-    <p>Skicka denna länk till lärare. Där kan de pricka av närvaro.</p>
     <div class="well well-sm">
-        <a href="{{attendanceLink}}">{{attendanceLink}}</a>
+        <h3>Avprickningslänk för lärare</h3>
+        <p><a href="{{attendanceLink}}">{{attendanceLink}}</a></p>
+        <div>Skicka ovanstående länk till lärare. Där kan de pricka av närvaro. Ingen inloggning krävs.</div>
     </div>
+
+
+    {{#if slots.count}}
+
+        {{#each slots}}
+            <div class="slot-bookings-section">
+
+                <div class="slot-name">
+                    {{name}}
+                </div>
+
+                {{#if bookingCount}}
+                    <div class="bookings-table">
+                        <table class="data-table">
+                            <tr>
+                                <th>Namn</th>
+                                {{#each attendanceDatesForSlot}}
+                                    <th>{{formatDate this}}</th>
+                                {{/each}}
+                            </tr>
+
+                            {{#each bookings}}
+                                <tr>
+                                    <td>{{childFullName}}</td>
+                                    {{#each attendanceDatesForBooking}}
+                                        <td class="{{attendanceCellCss}}">
+                                            {{> attendanceCheckbox attendanceCheckboxData}}
+                                        </td>
+                                    {{/each}}
+                                </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                {{else}}
+                    Denna grupp har inga bokningar...
+                {{/if}}
+            </div>
+
+        {{/each}}
+
+
+
+    {{/if}}
 
 </template>

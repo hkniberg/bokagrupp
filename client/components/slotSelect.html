@@ -1,10 +1,28 @@
+<!--
+Data context should be:
+{
+  course: ... //include a course OR a level
+  level: ...
+}
+-->
 <template name="slotSelect">
     <select class="slotSelect form-control">
         <option value="">(välj grupp)</option>
-        {{#each levels}}
-            {{#each slots}}
-                <option {{selected}} value="{{_id}}">{{../name}}: {{datePeriod}} {{time}}</option>
+        {{#if course}}
+            {{#each levels}}
+                {{#each slots}}
+                    <option {{selected}} value="{{_id}}">{{../name}}: {{datePeriod}} {{time}}</option>
+                {{/each}}
             {{/each}}
-        {{/each}}
+        {{/if}}
+
+        {{#if level}}
+            {{#each levels}}
+                {{#each slots}}
+                    <option {{selected}} value="{{_id}}">{{time}}</option>
+                {{/each}}
+            {{/each}}
+        {{/if}}
+
     </select>
 </template>

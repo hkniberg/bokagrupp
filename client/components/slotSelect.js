@@ -1,6 +1,11 @@
 import {getLevelsForCourse} from "../../lib/methods/levelMethods";
 import {getSlotsForLevel} from "../../lib/methods/slotMethods";
 
+Template.slotSelect.onRendered(function() {
+  const data = Template.currentData()
+  console.assert(data.course || data.level, "slotSelect template requires a data context that contains a course or level")
+})
+
 Template.slotSelect.events({
   "change .slotSelect"() {
     const slotSelect = $(".slotSelect")
@@ -11,8 +16,12 @@ Template.slotSelect.events({
 
 Template.slotSelect.helpers({
   levels() {
-    const course = Template.currentData()
-    return getLevelsForCourse(course._id)
+    const data = Template.currentData()
+    if (data.course) {
+      return getLevelsForCourse(course._id)
+    } else if (data.level) {
+      return [data.level]
+    }
   },
 
   slots() {

@@ -1,6 +1,8 @@
 import {getCourseWithAttendanceKey} from "../../../lib/methods/courseMethods"
 import {getSlot} from "../../../lib/methods/slotMethods";
 import {wasAttended} from "../../../lib/methods/attendanceMethods";
+import {getSelectedLevel} from "../../components/levelSelect";
+import {getSelectedLevelId} from "../../components/levelSelect";
 
 const selectedDateStringVar = new ReactiveVar(moment().format("YYYY-MM-DD"))
 
@@ -17,12 +19,19 @@ Template.editAttendance.helpers({
       return "selected"
     }
   },
-  
 
+  selectedLevel() {
+    return getSelectedLevel()
+  },
+  
   selectedSlot() {
     const selectedSlotId = Session.get("selectedSlotId")
     if (selectedSlotId) {
-      return getSlot(selectedSlotId)
+      const slot = getSlot(selectedSlotId)
+      const selectedLevelId = getSelectedLevelId()
+      if (slot.levelId == selectedLevelId) {
+        return slot
+      }
     } else {
       return null
     }
@@ -32,14 +41,21 @@ Template.editAttendance.helpers({
     return selectedDateStringVar.get()
   },
   
-  checked() {
+  attendanceCheckboxData() {
     const booking = Template.currentData()
-    const slot = booking.slot()
-    const date = getSelectedDate()
-    if (date) {
-      if (wasAttended(booking._id, slot._id, date)) {
-        return "checked"
-      }
+    return {
+      booking: booking,
+      slot: booking.slot(),
+      date: getSelectedDate()
+    }
+  },
+ 
+  attendeeCss() {
+    const booking = Template.currentData()
+    if (isAttendeeChecked(booking)) {
+      return "present"
+    } else {
+      return "notPresent"
     }
   }
 })
@@ -57,18 +73,6 @@ Template.editAttendance.events({
   "change .slotSelect"() {
     const slotId = $(".slotSelect").val()
     Session.set("selectedSlotId", slotId)
-  },
-
-  "change .attendanceCheckbox"(evt) {
-    const checkbox = $(evt.target)
-    const checked = checkbox.is(":checked")
-    const bookingId = checkbox.data("bookingid")
-    const slotId = Session.get("selectedSlotId")
-    Meteor.call("setAttended", bookingId, slotId, getSelectedDate(), checked, function(err) {
-      if (err) {
-        console.log(err)
-      }
-    })
   }
 })
 
@@ -78,5 +82,15 @@ function getSelectedDate() {
     return moment(dateString).toDate()
   } else {
     return null
+  }
+}
+
+function isAttendeeChecked(booking) {
+  const slot = booking.slot()
+  const date = getSelectedDate()
+  if (date) {
+    if (wasAttended(booking._id, slot._id, date)) {
+      return "checked"
+    }
   }
 }

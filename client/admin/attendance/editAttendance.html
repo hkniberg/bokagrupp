@@ -2,32 +2,36 @@
     Data context should be attendanceKey
 -->
 <template name="editAttendance">
-    <h1>Närvarolista</h1>
-    <div>{{course.name}}</div>
+    <div class="editAttendancePage">
+        <h1>Närvarolista</h1>
+        <div>{{course.name}}</div>
 
-    <div>
-        <b>Datum:</b><input type="date" class="selectedDate" value="{{selectedDate}}">
-    </div>
-    <div>
-        <b>Grupp:</b>
-        <select class="slotSelect">
-            <option value="">(Välj grupp)</option>
-            {{#each course.slots}}
-                <option {{slotSelected}} value="{{_id}}">{{name}}</option>
-            {{/each}}
-        </select>
-    </div>
-
-
-    {{#if selectedSlot}}
-        <div class="well well-sm margin-top">
-            {{#each selectedSlot.bookings}}
-                <div class="attendancePanel">
-                    <input type="checkbox" class="attendanceCheckbox" {{checked}} data-bookingid="{{_id}}">
-                    {{childFullName}}
-                </div>
-            {{/each}}
+        <div>
+            <b>Datum:</b><input type="date" class="selectedDate" value="{{selectedDate}}">
         </div>
-    {{/if}}
+
+        <div>
+            <b>Nivå:</b>
+            {{> levelSelect course}}
+        </div>
+
+        {{#if selectedLevel}}
+            <div class="margin-bottom">
+                <b>Tid:</b>
+                {{> slotSelect level=selectedLevel}}
+            </div>
+        {{/if}}
+
+        {{#if selectedSlot}}
+            <div class="well well-sm margin-top">
+                {{#each selectedSlot.bookings}}
+                    <div class="attendee {{attendeeCss}}">
+                        {{> attendanceCheckbox attendanceCheckboxData}}
+                        {{childFullName}} <a href="tel:{{parentPhone}}">{{parentPhone}}</a>
+                    </div>
+                {{/each}}
+            </div>
+        {{/if}}
+    </div>
 
 </template>

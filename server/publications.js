@@ -84,7 +84,7 @@ Meteor.publish('orgs', function() {
 /**
  * Includes my orgs + the given course, including level and slots, and optionally the bookings as well.
  */
-Meteor.publish('courseName', function(orgShortName, courseShortName, includeBookings) {
+Meteor.publish('courseName', function(orgShortName, courseShortName, includeBookings, includeAttendance) {
   try {
     const course = getCourseWithOrgAndShortName(orgShortName, courseShortName, false)
     if (!course) {
@@ -101,6 +101,11 @@ Meteor.publish('courseName', function(orgShortName, courseShortName, includeBook
       assertAdmin(this.userId, org._id)
       cursors.push(Bookings.find({courseId: course._id}))
     }
+    if (includeAttendance) {
+      assertAdmin(this.userId, org._id)
+      cursors.push(Attendance.find({courseId: course._id}))
+    }
+
 
     return cursors
 

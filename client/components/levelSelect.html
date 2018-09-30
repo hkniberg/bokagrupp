@@ -1,0 +1,11 @@
+<!--
+Data context should be a course
+-->
+<template name="levelSelect">
+    <select class="levelSelect form-control">
+        <option value="">(välj nivå)</option>
+        {{#each levels}}
+            <option {{selected}} value="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+</template>
