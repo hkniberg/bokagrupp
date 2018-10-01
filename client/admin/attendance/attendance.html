@@ -12,6 +12,12 @@
 
     {{#if slots.count}}
 
+        <h2>Närvaroöversikt</h2>
+        <div class="help">
+            Här ser du en översikt av vem som har närvarat i vilken grupp när.
+            Detta finns även med i <a href="{{coursePath}}/export" target="export">Excel exporten</a>.
+        </div>
+
         {{#each slots}}
             <div class="slot-bookings-section">
 
@@ -29,9 +35,13 @@
                                 {{/each}}
                             </tr>
 
-                            {{#each bookings}}
+                            {{#each bookingsForSlot}}
                                 <tr>
-                                    <td>{{childFullName}}</td>
+                                    <td class="{{childNameCellCss}}">{{childFullName}}
+                                        {{#if changedGroup}}
+                                            (inte kvar i gruppen)
+                                        {{/if}}
+                                    </td>
                                     {{#each attendanceDatesForBooking}}
                                         <td class="{{attendanceCellCss}}">
                                             {{> attendanceCheckbox attendanceCheckboxData}}

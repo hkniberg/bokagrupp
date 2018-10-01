@@ -22,15 +22,23 @@
             </div>
         {{/if}}
 
-        {{#if selectedSlot}}
-            <div class="well well-sm margin-top">
-                {{#each selectedSlot.bookings}}
-                    <div class="attendee {{attendeeCss}}">
-                        {{> attendanceCheckbox attendanceCheckboxData}}
-                        {{childFullName}} <a href="tel:{{parentPhone}}">{{parentPhone}}</a>
+        {{#if selectedDate}}
+
+            {{#if selectedSlot}}
+                {{#if selectedSlot.bookings.count}}
+                    <div class="well well-sm margin-top">
+                        {{#each selectedSlot.bookings}}
+                            <div class="attendee {{attendeeCss}}">
+                                {{> attendanceCheckbox attendanceCheckboxData}}
+                                {{childFullName}} <a href="tel:{{parentPhone}}">{{parentPhone}}</a>
+                            </div>
+                        {{/each}}
                     </div>
-                {{/each}}
-            </div>
+                {{else}}
+                    <div class="alert alert-danger">Ingen är anmäld till denna grupp. Tråkigt!</div>
+                {{/if}}
+
+            {{/if}}
         {{/if}}
     </div>
 

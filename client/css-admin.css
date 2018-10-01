@@ -11,6 +11,10 @@ form {
     padding: 5px;
 }
 
+.grayText {
+    color: gray;
+}
+
 .adminPage h1 {
     font-size: 24px;
     background-color: #ffffcc;
