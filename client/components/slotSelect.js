@@ -18,7 +18,7 @@ Template.slotSelect.helpers({
   levels() {
     const data = Template.currentData()
     if (data.course) {
-      return getLevelsForCourse(course._id)
+      return getLevelsForCourse(data.course._id)
     } else if (data.level) {
       return [data.level]
     }
