@@ -4,23 +4,14 @@ import {getSlotsSchema} from "../../lib/schemas/slotsSchema";
 import {getLevelsSchema} from "../../lib/schemas/levelsSchema";
 import {getCoursesSchema} from "../../lib/schemas/coursesSchema";
 
-let counter = 0
-
-Template.inPlace.onRendered(function() {
-  const data = Template.currentData()
-  
-  AutoForm.addHooks(['InPlaceForm for ' + data.doc._id], {
-    onSuccess: function(formType, newId) {
-      Session.set("inPlaceEditing", null)
-    }
-  })
-
-})
-
 Template.inPlace.helpers({
 
   isDate() {
-    return Template.currentData().type == "date"
+    const data = Template.currentData()
+    const field = data.field
+    const doc = data.doc
+    const fieldType = typeof doc[field]
+    return fieldType == "object"
   },
 
   schema() {
@@ -82,5 +73,33 @@ Template.inPlace.events({
   "click .inPlaceField"(event) {
     const data = Template.currentData()
     Session.set("inPlaceEditing", data.doc._id + " " + data.field)
+  },
+  
+  "keydown input"(evt) {
+    //If enter is pressed, stopped editing
+    if (evt.keyCode == 13) {
+      save()
+    }
+  },
+
+  "blur input"(evt) {
+    save()
+  },
+
+  "keydown textarea"(evt) {
+    //If enter is pressed, stopped editing
+    if (evt.keyCode == 13) {
+      save()
+    }
+  },
+
+  "blur textarea"(evt) {
+    save()
   }
+
 })
+
+function save() {
+  $("form").submit()
+  Session.set("inPlaceEditing", null)
+}
