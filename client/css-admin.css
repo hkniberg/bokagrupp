@@ -81,8 +81,8 @@ form {
     border: none;
 }
 
-.payment_status_button_table {
-    margin: 0 0 0 0;
+.payment_status_buttons {
+    white-space: nowrap;
 }
 
 .payment_status_true {

@@ -4,14 +4,14 @@ import {formatDate} from "../../../lib/dateUtil"
 Template.unpaidBookingsForCourse.helpers({
   unpaidBookings() {
     const course = Template.currentData()
-    return getUnpaidBookingsForCourse(course._id)
+    return getUnpaidBookingsForCourse(course._id, true)
   },
 
   tableSettings() {
     const course = Template.currentData()
 
     return {
-      collection: getUnpaidBookingsForCourse(course._id),
+      collection: getUnpaidBookingsForCourse(course._id, true),
       fields: [
         {label: "Betalat?", tmpl: Template.unpaidBookingsForCourse_paymentStatusButton, sortable: false},
         {key: "childFirstName", label: "Förnamn"},
