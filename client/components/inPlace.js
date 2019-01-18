@@ -63,7 +63,11 @@ Template.inPlace.helpers({
 
   editing() {
     const data = Template.currentData()
-    return Session.get("inPlaceEditing") == data.doc._id + " " + data.field
+    if (data.alwaysEdit) {
+      return true
+    } else {
+      return Session.get("inPlaceEditing") == data.doc._id + " " + data.field
+    }
   }
 
 

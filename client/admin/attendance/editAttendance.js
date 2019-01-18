@@ -6,6 +6,10 @@ import {getSelectedLevelId} from "../../components/levelSelect";
 
 const selectedDateStringVar = new ReactiveVar(moment().format("YYYY-MM-DD"))
 
+Template.editAttendance.onRendered(function() {
+  hideComment()
+})
+
 Template.editAttendance.helpers({
   course() {
     const attendanceKey = Template.currentData()
@@ -57,7 +61,34 @@ Template.editAttendance.helpers({
     } else {
       return "notPresent"
     }
+  },
+
+  commentIconColor() {
+    const booking = Template.currentData()
+    if (booking.comment) {
+      return "red"
+    } else {
+      return "gray"
+    }
+  },
+
+  showComment() {
+    const bookingIdToShowCommentFor = getCurrentlyShownCommentBookingId()
+    const booking = Template.currentData()
+    if (booking && bookingIdToShowCommentFor && (booking._id == bookingIdToShowCommentFor)) {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  commentPlaceHolder() {
+    const booking = Template.currentData()
+    return "Kommentar om " + booking.childFirstName
+
   }
+
+
 })
 
 Template.editAttendance.events({
@@ -73,8 +104,31 @@ Template.editAttendance.events({
   "change .slotSelect"() {
     const slotId = $(".slotSelect").val()
     Session.set("selectedSlotId", slotId)
+  },
+
+  "click .commentIcon"() {
+    const bookingId = $(event.target).data("bookingid")
+    const currentlyShownCommentBookingId = getCurrentlyShownCommentBookingId()
+    if (currentlyShownCommentBookingId == bookingId) {
+      hideComment()
+    } else {
+      showComment(bookingId)
+    }
   }
 })
+
+function getCurrentlyShownCommentBookingId() {
+  return Session.get("showBookingComment")
+}
+
+function showComment(bookingId) {
+  console.log("showComment " + bookingId)
+  Session.set("showBookingComment", bookingId)
+}
+
+function hideComment() {
+  Session.set("showBookingComment", null)
+}
 
 function getSelectedDate() {
   const dateString = selectedDateStringVar.get()

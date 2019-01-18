@@ -5,13 +5,14 @@ Context should be something like:
   doc: ...
   fieldName: ...
   type: ...
+  alwaysEdit: true if should be editing immediately. false if you need to click to start editing.
 }
 -->
 <template name="inPlace">
     {{#if editing}}
         <td>
         {{#autoForm schema=schema id=formId doc=doc type="method-update" meteormethod=methodName autosave=true}}
-            {{> afFieldInput name=field type=type}}
+            {{> afFieldInput name=field type=type placeholder=placeHolder}}
             {{#if afFieldIsInvalid name=field}}
                 <span class="text-danger">{{afFieldMessage name=field}}</span>
             {{/if}}
