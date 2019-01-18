@@ -30,7 +30,7 @@
                                     {{> inPlace collection=Bookings field="childFirstName" doc=this}}
                                     {{> inPlace collection=Bookings field="childLastName" doc=this}}
 
-                                    <td>{{> paymentStatusButtons}}</td>
+                                    <td>{{> paymentStatusButtons booking=this confirm=true}}</td>
                                     <td>{{formatDate childBirthDate}}</td>
                                     {{> inPlace collection=Bookings field="childZip" doc=this}}
                                     {{> inPlace collection=Bookings field="childMembershipNumber" doc=this}}

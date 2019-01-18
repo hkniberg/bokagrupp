@@ -13,7 +13,7 @@ Template.unpaidBookingsForCourse.helpers({
     return {
       collection: getUnpaidBookingsForCourse(course._id),
       fields: [
-        {label: "Betalat?", tmpl: Template.paymentStatusButtons, sortable: false},
+        {label: "Betalat?", tmpl: Template.unpaidBookingsForCourse_paymentStatusButton, sortable: false},
         {key: "childFirstName", label: "Förnamn"},
         {key: "childLastName", label: "Efternamn"},
         {key: "childMembershipNumber", label: "Medlemsnummer"},
