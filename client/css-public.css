@@ -152,6 +152,14 @@ table .notPresent {
 
 }
 
+.commentEditor {
+    width: 100%;
+}
+
+.commentIcon {
+    font-size: 20px;
+}
+
 
 
 .snow{

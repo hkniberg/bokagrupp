@@ -85,7 +85,6 @@ Template.editAttendance.helpers({
   commentPlaceHolder() {
     const booking = Template.currentData()
     return "Kommentar om " + booking.childFirstName
-
   }
 
 
@@ -106,16 +105,29 @@ Template.editAttendance.events({
     Session.set("selectedSlotId", slotId)
   },
 
-  "click .commentIcon"() {
+  "click .commentIcon"(event) {
     const bookingId = $(event.target).data("bookingid")
     const currentlyShownCommentBookingId = getCurrentlyShownCommentBookingId()
     if (currentlyShownCommentBookingId == bookingId) {
+      saveComment(bookingId)
       hideComment()
     } else {
       showComment(bookingId)
     }
+  },
+
+  "change textarea"(event) {
+    const bookingId = $(event.target).data("bookingid")
+    saveComment(bookingId)
   }
 })
+
+function saveComment(bookingId) {
+  const attendanceKey = Template.currentData()
+  const commentField = $(".commentEditor")
+  const comment = commentField.val()
+  Meteor.call("updateComment", attendanceKey, bookingId, comment)
+}
 
 function getCurrentlyShownCommentBookingId() {
   return Session.get("showBookingComment")

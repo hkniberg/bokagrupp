@@ -34,9 +34,7 @@
                                 <span class="glyphicon glyphicon-comment commentIcon" data-bookingid="{{_id}}" style="color:{{commentIconColor}}" aria-hidden="true"></span>
                                 {{#if showComment}}
                                     <div>
-                                        {{#autoForm collection=Bookings id="attendanceCommentForm" doc=this type="method-update" meteormethod="updateBooking" autosave=true}}
-                                            {{> afFieldInput name="comment" placeholder=commentPlaceHolder}}
-                                        {{/autoForm}}
+                                        <textarea class="commentEditor" data-bookingid="{{_id}}" placeholder="{{commentPlaceHolder}}">{{comment}}</textarea>
                                     </div>
                                 {{/if}}
                             </div>
